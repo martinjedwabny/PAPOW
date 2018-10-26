@@ -1,4 +1,4 @@
-package voting.result;
+package base.result;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
+import base.Ballot;
+import base.Question;
+import base.Session;
+import base.Vote;
+import base.rules.VotingRule;
 import io.criterion.Criterion;
-import voting.Ballot;
-import voting.Question;
-import voting.Session;
-import voting.Vote;
-import voting.rules.VotingRule;
 
 public class SessionRunner {
 	/**

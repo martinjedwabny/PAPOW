@@ -1,4 +1,4 @@
-package voting;
+package base;
 
 public class Category {
 	private String description;

@@ -1,15 +1,15 @@
 /**
  * 
  */
-package voting.rules.scoring;
+package base.rules.scoring;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import voting.Alternative;
-import voting.Ballot;
+import base.Alternative;
+import base.Ballot;
 
 /**
  * Copeland

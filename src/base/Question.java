@@ -1,4 +1,4 @@
-package voting;
+package base;
 
 import java.util.Set;
 import java.util.Vector;

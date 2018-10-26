@@ -1,4 +1,4 @@
-package voting.rules.scoring;
+package base.rules.scoring;
 
 public class BordaFair extends PositionalScoringRule {
 	

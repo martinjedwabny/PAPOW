@@ -1,4 +1,4 @@
-package voting.rules.scoring;
+package base.rules.scoring;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import voting.Alternative;
-import voting.Ballot;
-import voting.rules.VotingRule;
+import base.Alternative;
+import base.Ballot;
+import base.rules.VotingRule;
 
 /**
  * Scoring rule

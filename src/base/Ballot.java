@@ -1,8 +1,9 @@
-package voting;
+package base;
 
 import java.util.HashMap;
 import java.util.Map;
-import voting.orders.TotalPreorder;
+
+import base.orders.TotalPreorder;
 
 /** Ballot
  * A class that models user rankings as Total Preorders of Alternatives 

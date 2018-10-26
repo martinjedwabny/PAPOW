@@ -1,12 +1,12 @@
 package io.parser;
 
-import voting.rules.VotingRule;
-import voting.rules.iterative.InstantRunoff;
-import voting.rules.scoring.BordaFair;
-import voting.rules.scoring.KApproval;
-import voting.rules.scoring.BordaOptimistic;
-import voting.rules.scoring.BordaPessimistic;
-import voting.rules.scoring.Copeland;
+import base.rules.VotingRule;
+import base.rules.iterative.InstantRunoff;
+import base.rules.scoring.BordaFair;
+import base.rules.scoring.BordaOptimistic;
+import base.rules.scoring.BordaPessimistic;
+import base.rules.scoring.Copeland;
+import base.rules.scoring.KApproval;
 
 public class VotingRuleParser {
 	/**

@@ -1,13 +1,13 @@
-package voting.result;
+package base.result;
 
 import java.util.List;
 import java.util.Map;
 
+import base.Ballot;
+import base.Question;
+import base.Vote;
+import base.rules.VotingRule;
 import io.criterion.Criterion;
-import voting.Ballot;
-import voting.Question;
-import voting.Vote;
-import voting.rules.VotingRule;
 
 /**
  * SessionResult

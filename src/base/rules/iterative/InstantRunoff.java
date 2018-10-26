@@ -1,4 +1,4 @@
-package voting.rules.iterative;
+package base.rules.iterative;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-import voting.Alternative;
-import voting.Ballot;
+import base.Alternative;
+import base.Ballot;
 
  /**
  * Instant Runoff:
