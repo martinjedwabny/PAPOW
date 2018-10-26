@@ -1,5 +1,7 @@
 bin/
 output/
+target/
+manifest
 
 # Compiled class file
 *.class
