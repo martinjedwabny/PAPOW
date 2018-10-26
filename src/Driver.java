@@ -44,7 +44,7 @@ public class Driver {
 	public static void main(String[] args) throws Exception {
 		
 		// Command options parsing
-		args = ("-f resources/json-sample-1.txt -v [co] -c [[(Color,Green)],[(Color,Red),(Country,Algeria)]]").split(" ");
+		args = ("-f res/json-sample-1.txt -v [co] -c [[(Color,Green)],[(Color,Red),(Country,Algeria)]]").split(" ");
 		
 		try {
 			Command command = CommandParser.parseCommand(args);
