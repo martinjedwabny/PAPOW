@@ -1,15 +1,15 @@
-package driver;
+package io.driver;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import org.json.simple.parser.ParseException;
 
+import base.Session;
+import base.result.SessionResult;
+import base.result.SessionRunner;
 import io.command.Command;
 import io.parser.CommandParser;
 import io.parser.SessionParser;
 import io.result.SessionResultStringAdaptor;
-import voting.Session;
-import voting.result.SessionResult;
-import voting.result.SessionRunner;
 
 /**
  * Driver
@@ -44,7 +44,7 @@ public class Driver {
 	public static void main(String[] args) throws Exception {
 		
 		// Command options parsing
-		args = ("-f json-example.txt -v [co] -c [[(Color,Green)],[(Color,Red),(Country,Algeria)]]").split(" ");
+		args = ("-f resources/json-sample-1.txt -v [co] -c [[(Color,Green)],[(Color,Red),(Country,Algeria)]]").split(" ");
 		
 		try {
 			Command command = CommandParser.parseCommand(args);

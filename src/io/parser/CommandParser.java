@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import base.rules.VotingRule;
 import io.command.Command;
 import io.criterion.Criterion;
-import voting.rules.VotingRule;
 
 public class CommandParser {
 

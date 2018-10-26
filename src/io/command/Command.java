@@ -2,8 +2,8 @@ package io.command;
 
 import java.util.List;
 
+import base.rules.VotingRule;
 import io.criterion.Criterion;
-import voting.rules.VotingRule;
 
 public class Command {
 	

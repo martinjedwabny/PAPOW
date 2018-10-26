@@ -1,14 +1,14 @@
-package voting.rules.scoring;
+package base.rules.scoring;
 
-public class BordaOptimistic extends PositionalScoringRule {
+public class BordaPessimistic extends PositionalScoringRule {
 
 	/* Takes the amount of alternatives that are lesser, greater and equally ranked as itself
 	 * as well as the rank of the alternative as outputs the score:
-	 * score = (amount of lesser ranked alternatives) + (amount of equally ranked alternatives) - 1
+	 * score = (amount of lesser ranked alternatives)
 	 * @return the score of the alternative
 	 */
 	public Double score(Integer less, Integer greater, Integer equal, Integer rank) {
-		return less.doubleValue() + equal.doubleValue() - 1.0;
+		return less.doubleValue();
 	}
 	
 	/* (non-Javadoc)
@@ -16,6 +16,6 @@ public class BordaOptimistic extends PositionalScoringRule {
 	 */
 	@Override
 	public String toString() {
-		return "Optimistic Borda";
+		return "Pessimistic Borda";
 	}
 }

@@ -1,4 +1,4 @@
-package voting;
+package base;
 
 public class Alternative {
 	/**

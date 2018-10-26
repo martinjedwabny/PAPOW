@@ -1,8 +1,8 @@
-package voting.rules;
+package base.rules;
 
 import java.util.List;
 
-import voting.Ballot;
+import base.Ballot;
 
 /**
  * Voting rule

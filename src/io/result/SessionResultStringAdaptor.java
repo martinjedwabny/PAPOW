@@ -1,10 +1,10 @@
 package io.result;
 
-import voting.Ballot;
-import voting.Question;
-import voting.Vote;
-import voting.result.SessionResult;
-import voting.rules.VotingRule;
+import base.Ballot;
+import base.Question;
+import base.Vote;
+import base.result.SessionResult;
+import base.rules.VotingRule;
 
 /**
  * TerminalResultAdaptor

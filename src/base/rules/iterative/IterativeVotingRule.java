@@ -1,9 +1,9 @@
-package voting.rules.iterative;
+package base.rules.iterative;
 
 import java.util.List;
 
-import voting.Ballot;
-import voting.rules.VotingRule;
+import base.Ballot;
+import base.rules.VotingRule;
 
 /**
  * Iterative voting rule
