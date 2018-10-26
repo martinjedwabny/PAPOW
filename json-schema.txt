@@ -1,0 +1,190 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "required": [
+    "questions",
+    "votes",
+    "voters",
+    "categoryFamilies"
+  ],
+  "properties": {
+    "questions": {
+      "$id": "#questions",
+      "type": "array",
+      "items": {
+        "$id": "#items",
+        "type": "object",
+        "required": [
+          "id",
+          "description",
+          "alternatives"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#id",
+            "type": "integer"
+          },
+          "description": {
+            "$id": "#description",
+            "type": "string",
+            "pattern": "^(.*)$"
+          },
+          "alternatives": {
+            "$id": "#alternatives",
+            "type": "array",
+            "items": {
+              "$id": "#items",
+              "type": "object",
+              "required": [
+                "idAlternative",
+                "name"
+              ],
+              "properties": {
+                "idAlternative": {
+                  "$id": "#idAlternative",
+                  "type": "integer"
+                },
+                "name": {
+                  "$id": "#name",
+                  "type": "string",
+                  "pattern": "^(.*)$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "votes": {
+      "$id": "#votes",
+      "type": "array",
+      "items": {
+        "$id": "#items",
+        "type": "object",
+        "required": [
+          "id",
+          "idQuestion",
+          "voter",
+          "ranking",
+          "categories"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#id",
+            "type": "integer"
+          },
+          "idQuestion": {
+            "$id": "#idQuestion",
+            "type": "integer"
+          },
+          "voter": {
+            "$id": "#voter",
+            "type": "integer"
+          },
+          "ranking": {
+            "$id": "#ranking",
+            "type": "array",
+            "items": {
+              "$id": "#items",
+              "type": "integer"
+            }
+          },
+          "categories": {
+            "$id": "#categories",
+            "type": "array",
+            "items": {
+              "$id": "#items",
+              "type": "object",
+              "required": [
+                "idFamily",
+                "idCategory"
+              ],
+              "properties": {
+                "idFamily": {
+                  "$id": "#idFamily",
+                  "type": "integer"
+                },
+                "idCategory": {
+                  "$id": "#idCategory",
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "voters": {
+      "$id": "#voters",
+      "type": "array",
+      "items": {
+        "$id": "#items",
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#id",
+            "type": "integer"
+          },
+          "name": {
+            "$id": "#name",
+            "type": "string",
+            "pattern": "^(.*)$"
+          }
+        }
+      }
+    },
+    "categoryFamilies": {
+      "$id": "#categoryFamilies",
+      "type": "array",
+      "items": {
+        "$id": "#items",
+        "type": "object",
+        "required": [
+          "id",
+          "description",
+          "categories"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#id",
+            "type": "integer"
+          },
+          "description": {
+            "$id": "#description",
+            "type": "string",
+            "pattern": "^(.*)$"
+          },
+          "categories": {
+            "$id": "#categories",
+            "type": "array",
+            "items": {
+              "$id": "#items",
+              "type": "object",
+              "required": [
+                "idCategory",
+                "description"
+              ],
+              "properties": {
+                "idCategory": {
+                  "$id": "#idCategory",
+                  "type": "integer"
+                },
+                "description": {
+                  "$id": "#description",
+                  "type": "string",
+                  "pattern": "^(.*)$"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

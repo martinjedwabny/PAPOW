@@ -1,0 +1,22 @@
+{
+	"questions":[
+		{"id":1,"description":"Name of question 1", "alternatives": [
+			{"idAlternative": 1, "name": "Option1"},
+			{"idAlternative": 2, "name": "Option2"}
+		]}
+	],
+	"votes": [
+		{"id":1, "idQuestion": 1,"voter":1, "ranking": [1,2], "categories": [{"idFamily":1, "idCategory":1}]},
+		{"id":2, "idQuestion": 1,"voter":2, "ranking": [2,1], "categories": [{"idFamily":1, "idCategory":2}]}
+	],
+	"voters": [
+		{"id":1, "name": "Pierre"},
+		{"id":2, "name": "Raouf"}
+	],
+	"categoryFamilies": [
+		{"id":1, "description": "Country", "categories": [
+			{"idCategory": 1, "description": "France"},
+			{"idCategory": 2, "description": "Algeria"}		
+		]}
+	]
+}
