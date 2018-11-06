@@ -1,4 +1,4 @@
-package main.io.parser;
+package main.io.reader;
 
 import org.json.simple.JSONObject;
 
@@ -15,8 +15,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import main.base.*;
+import main.base.ordering.Ballot;
+import main.base.session.SessionInput;
 
-public class SessionParser {
+public class SessionInputJsonReader {
 	
 	/**
 	 * Given the name of a json file, read the json and create a voting session that represents the input in it.
@@ -34,7 +36,7 @@ public class SessionParser {
 	 * @throws ParseException if the json file has an invalid format.
 	 * @throws FileNotFoundException if the json file does not exists.
 	 */
-	public static Session parseSession(String jsonName) 
+	public static SessionInput read(String jsonName) 
 			throws IOException, ParseException, FileNotFoundException {
 		// Objects to fill from file
 		Vector<Question> questions = new Vector<Question>();
@@ -62,7 +64,7 @@ public class SessionParser {
 		parseJSonObjectsAndFillResults(questions, votes, voters, families, questionHash, alternativeHash, voterHash,
 				familyHash, categoryHash, questionsJ, votesJ, votersJ, categoryFamiliesJ);
 		
-		return new Session(questions, votes, voters, families);
+		return new SessionInput(questions, votes, voters, families);
 	}
 	
 	/**
@@ -72,10 +74,14 @@ public class SessionParser {
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	private static JSONObject getJsonFromFile(String jsonName) throws IOException, ParseException {
-		FileReader fr = new FileReader(jsonName);
-		Object input = new JSONParser().parse(fr);
-		JSONObject json = (JSONObject) input;
+	private static JSONObject getJsonFromFile(String jsonName) {
+		JSONObject json = null;
+		try (FileReader fr = new FileReader(jsonName)) {
+			Object input = new JSONParser().parse(fr);
+			json = (JSONObject) input;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return json;
 	}
 

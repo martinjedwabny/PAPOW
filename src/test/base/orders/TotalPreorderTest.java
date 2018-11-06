@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import junit.framework.Assert;
-import main.base.orders.TotalPreorder;
+import main.base.ordering.TotalPreorder;
 
 public class TotalPreorderTest {
 	TotalPreorder<Character> example;

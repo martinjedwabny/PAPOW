@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import main.base.Alternative;
-import main.base.Ballot;
+import main.base.ordering.Ballot;
 
 /**
  * Positional scoring rule
@@ -16,7 +16,8 @@ import main.base.Ballot;
  * that an alternative is better than another iff the score is higher
  */
 public abstract class PositionalScoringRule extends ScoringRule {
-	
+	private static final long serialVersionUID = 1L;
+
 	protected Map<Alternative, Double> generateScores(List<Ballot> rankings) {
 		Map<Alternative, Double> scores = new HashMap<Alternative, Double>();
 		for (Ballot ranking : rankings) {

@@ -1,0 +1,20 @@
+----------------------------------------------------------------------------------------------------
+Criterion: ((Color=Green) or (Color=Red and Country=Algeria))
+----------------------------------------------------------------------------------------------------
+Question: 'Name of question 1'
+----------------------------------------------------------------------------------------------------
+
+	Votes:
+		Vote [ranking={1=[B], 2=[C], 3=[A]}, voter=Voter [V5], categories={Country=Algeria, Color=Red}]
+		Vote [ranking={1=[A], 2=[B], 3=[C]}, voter=Voter [V3], categories={Country=Algeria, Color=Red}]
+		Vote [ranking={1=[A], 2=[B], 3=[C]}, voter=Voter [V2], categories={Country=France, Color=Green}]
+		Vote [ranking={1=[B], 2=[C], 3=[A]}, voter=Voter [V7], categories={Country=Algeria, Color=Red}]
+		Vote [ranking={1=[C], 2=[B], 3=[A]}, voter=Voter [V9], categories={Country=Algeria, Color=Red}]
+		Vote [ranking={1=[C], 2=[B], 3=[A]}, voter=Voter [V8], categories={Country=Algeria, Color=Red}]
+		Vote [ranking={1=[A], 2=[B], 3=[C]}, voter=Voter [V4], categories={Country=Algeria, Color=Green}]
+		Vote [ranking={1=[B], 2=[C], 3=[A]}, voter=Voter [V6], categories={Country=Algeria, Color=Red}]
+
+	Copeland
+		Ranking {1=[B], 2=[C], 3=[A]}
+
+----------------------------------------------------------------------------------------------------

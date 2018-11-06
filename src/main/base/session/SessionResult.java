@@ -1,11 +1,13 @@
-package main.base.result;
+package main.base.session;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import main.base.Ballot;
 import main.base.Question;
 import main.base.Vote;
+import main.base.ordering.Ballot;
 import main.base.rules.VotingRule;
 import main.io.criterion.Criterion;
 
@@ -15,13 +17,20 @@ import main.io.criterion.Criterion;
  * Represents the unformatted output of a Session (a voting session with a set of rules and questions).
  * 
  */
-public class SessionResult {
-	List<Question> questions;
-	List<VotingRule> votingRules;
+public class SessionResult implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	Map<Question, List<Vote>> validVotes;
 	Map<Question, Map<VotingRule, Ballot>> results;
-	Criterion criterion;
 	
+	/**
+	 * Empty constructor
+	 */
+	public SessionResult() {
+		this.validVotes = new HashMap<Question, List<Vote>>();
+		this.results = new HashMap<Question, Map<VotingRule, Ballot>>();
+	}
+
 	/**
 	 * Default Constructor
 	 * @param questions
@@ -33,25 +42,8 @@ public class SessionResult {
 	public SessionResult(List<Question> questions, List<VotingRule> votingRules, Map<Question, List<Vote>> validVotes,
 			Map<Question, Map<VotingRule, Ballot>> results, Criterion criterion) {
 		super();
-		this.questions = questions;
-		this.votingRules = votingRules;
 		this.validVotes = validVotes;
 		this.results = results;
-		this.criterion = criterion;
-	}
-
-	/**
-	 * @return the questions
-	 */
-	public List<Question> getQuestions() {
-		return questions;
-	}
-	
-	/**
-	 * @return the votingRules
-	 */
-	public List<VotingRule> getVotingRules() {
-		return votingRules;
 	}
 	
 	/**
@@ -66,12 +58,5 @@ public class SessionResult {
 	 */
 	public Map<Question, Map<VotingRule, Ballot>> getResults() {
 		return results;
-	}
-
-	/**
-	 * @return the criterion
-	 */
-	public Criterion getCriterion() {
-		return criterion;
 	}
 }

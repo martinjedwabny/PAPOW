@@ -1,4 +1,4 @@
-package main.io.parser;
+package main.io.reader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import main.base.rules.VotingRule;
-import main.io.command.Command;
+import main.base.session.SessionCommand;
 import main.io.criterion.Criterion;
 
-public class CommandParser {
+public class SessionCommandStringReader {
 
-	private static String fileNameKey = "-f";
+	private static String inputPathKey = "-f";
+	private static String outputPathKey = "-o";
 	private static String votingRuleKey = "-v";
 	private static String criterionKey = "-c";
 	
@@ -21,17 +22,13 @@ public class CommandParser {
 	 * @param args arguments of the input
 	 * @return command an instance of Command class
 	 */
-	public static Command parseCommand(String[] args) {
+	public static SessionCommand read(String[] args) {
 		Map<String, String> options = argumentsToMap(args);
-		if (options.get(fileNameKey) == null || options.get(votingRuleKey) == null) {
-			System.out.println("Problem: be sure to include " + 
-					fileNameKey + " (fileName) and " + votingRuleKey + " (voting rules) tags");
-			return null;
-		}
-		String fileName = options.get(fileNameKey);
-		List<VotingRule> rules = parseRules(options);
-		Criterion criterion = parseCriterion(options);
-		return new Command(fileName, rules, criterion);
+		String inputPath = options.getOrDefault(inputPathKey, "");
+		String outputPath = options.getOrDefault(outputPathKey, "");
+		List<VotingRule> rules = parseRules(options.getOrDefault(votingRuleKey, null));
+		Criterion criterion = parseCriterion(options.getOrDefault(criterionKey, null));
+		return new SessionCommand(inputPath, outputPath, rules, criterion);
 	}
 	
 	/**
@@ -64,37 +61,32 @@ public class CommandParser {
 	}
 
 	/**
-	 * Given a map of command options, get the voting rules specified in the options
-	 * and construct the objects representing those rules.
-	 * @param options
+	 * Given a string of voting rules specified in the options
+	 * construct the objects representing those rules.
+	 * @param votingRule String
 	 * @return list of voting rules to use in the calculations
 	 */
-	private static List<VotingRule> parseRules(Map<String, String> options) {
+	private static List<VotingRule> parseRules(String votingRule) {
 		List<VotingRule> rules = new ArrayList<VotingRule>();
 		String[] ruleCodes = null;
 		try {
-			ruleCodes = options.get(votingRuleKey).substring(1, options.get(votingRuleKey).length()-1).split(",");
+			ruleCodes = votingRule.substring(1, votingRule.length()-1).split(",");
 		} catch (Exception e) {
 			System.out.println("Problem parsing voting rules.");
 			return rules;
 		}
 		for (String ruleCode : ruleCodes)
-			rules.add(VotingRuleParser.parseRule(ruleCode));
+			rules.add(VotingRuleReader.read(ruleCode));
 		return rules;
 	}
 
 	/**
-	 * Given a map of command options, parse the criterion for filtering votes
-	 * and construct the object representing that criterion.
-	 * @param options
+	 * Given a string criterion for filtering votes
+	 * construct the object representing that criterion.
+	 * @param criterion String
 	 * @return criterion specified
 	 */
-	private static Criterion parseCriterion(Map<String, String> options) {
-		String scriteria = null;
-		if (options.get(criterionKey) != null && options.get(criterionKey).length() > 2)
-			scriteria = options.get(criterionKey);
-		return CriterionParser.parseCriterion(scriteria);
+	private static Criterion parseCriterion(String criterion) {
+		return CriterionStringReader.read(criterion);
 	}
-
-	
 }

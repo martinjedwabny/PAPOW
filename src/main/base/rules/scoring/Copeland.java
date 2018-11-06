@@ -9,12 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 import main.base.Alternative;
-import main.base.Ballot;
+import main.base.ordering.Ballot;
 
 /**
  * Copeland
  */
 public class Copeland extends ScoringRule {
+	private static final long serialVersionUID = 1L;
 
 	/* 
 	 * The score of each alternative is calculated as the amount of alternatives to which

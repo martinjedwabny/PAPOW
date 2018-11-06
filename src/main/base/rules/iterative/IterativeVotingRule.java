@@ -2,7 +2,7 @@ package main.base.rules.iterative;
 
 import java.util.List;
 
-import main.base.Ballot;
+import main.base.ordering.Ballot;
 import main.base.rules.VotingRule;
 
 /**
@@ -11,6 +11,8 @@ import main.base.rules.VotingRule;
  * until a certain condition is achieved (all positions in the ranking are determined)
  */
 public abstract class IterativeVotingRule extends VotingRule {
+	private static final long serialVersionUID = 1L;
+
 
 	/* 
 	 * Execute an iteration step (in which rankings are computed)

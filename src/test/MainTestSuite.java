@@ -23,5 +23,5 @@ import test.io.CriterionTest;
 	QuestionTest.class,
 	TotalPreorderTest.class,
 	VotingRuleTest.class})
-public class VotingTestSuite {
+public class MainTestSuite {
 }

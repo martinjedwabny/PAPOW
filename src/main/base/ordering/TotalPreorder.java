@@ -1,5 +1,6 @@
-package main.base.orders;
+package main.base.ordering;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -18,7 +19,8 @@ import java.util.TreeMap;
  *
  * @param <T> the type of object to order
  */
-public class TotalPreorder<T> {
+public class TotalPreorder<T> implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * rankForElement for each element, its rank in the total preorder (path-depth from a least element)

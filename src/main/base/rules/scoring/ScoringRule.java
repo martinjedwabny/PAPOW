@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import main.base.Alternative;
-import main.base.Ballot;
+import main.base.ordering.Ballot;
 import main.base.rules.VotingRule;
 
 /**
@@ -18,6 +18,7 @@ import main.base.rules.VotingRule;
  * Then, an alternative is preferred to another if its score is bigger.
  */
 public abstract class ScoringRule extends VotingRule {
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * The score for each alternative. 

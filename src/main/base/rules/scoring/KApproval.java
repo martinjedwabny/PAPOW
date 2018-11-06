@@ -1,6 +1,7 @@
 package main.base.rules.scoring;
 
 public class KApproval extends PositionalScoringRule {
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * the threshold that the alternatives rank has to pass in order to increase the score by 1

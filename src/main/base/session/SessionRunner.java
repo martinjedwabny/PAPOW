@@ -1,4 +1,4 @@
-package main.base.result;
+package main.base.session;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -6,10 +6,9 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
-import main.base.Ballot;
 import main.base.Question;
-import main.base.Session;
 import main.base.Vote;
+import main.base.ordering.Ballot;
 import main.base.rules.VotingRule;
 import main.io.criterion.Criterion;
 
@@ -23,7 +22,7 @@ public class SessionRunner {
 	 * @param criterion
 	 * @return votingResults a map that for each question and rule, yields the output of that voting
 	 */
-	public static SessionResult generateResults(Session session, List<VotingRule> rules, Criterion criterion) {
+	public static SessionResult generateResults(SessionInput session, List<VotingRule> rules, Criterion criterion) {
 		Map<Question, List<Vote>> validVotes = new LinkedHashMap<Question, List<Vote>>();
 		Map<Question, Map<VotingRule, Ballot>> votingResults = new LinkedHashMap<Question, Map<VotingRule, Ballot>>();
 		// Get results for each questions, parallelize computations

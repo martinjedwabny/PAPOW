@@ -1,16 +1,18 @@
-package main.base;
+package main.base.ordering;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.base.orders.TotalPreorder;
+import main.base.Alternative;
 
 /** Ballot
  * A class that models user rankings as Total Preorders of Alternatives 
  * and provides additional access methods related to voting contexts.
  */
-public class Ballot extends TotalPreorder<Alternative> {
-	
+public class Ballot extends TotalPreorder<Alternative> implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Default constructor
 	 * Takes a map from an Alternative to a particular rank (Integer) and outputs a Ballot

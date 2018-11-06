@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import junit.framework.Assert;
 import main.base.*;
+import main.base.ordering.Ballot;
 import main.base.rules.iterative.*;
 import main.base.rules.scoring.*;
 

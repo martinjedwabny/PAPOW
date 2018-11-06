@@ -1,5 +1,6 @@
 package main.io.criterion;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -14,8 +15,9 @@ import java.util.Map;
  * CriterionEmpty and CriterionEquals are the base cases.
  * CriterionOr and CriterionAnd are the recursive cases.
  */
-public abstract class Criterion {
-	
+public abstract class Criterion implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Return true iff certain conditions are met according to the keys and values of the input.
 	 * @param profile a profile (as Map<String, String>)

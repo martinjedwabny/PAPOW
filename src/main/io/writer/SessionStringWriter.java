@@ -1,20 +1,20 @@
-package main.io.result;
+package main.io.writer;
 
-import main.base.Ballot;
 import main.base.Question;
 import main.base.Vote;
-import main.base.result.SessionResult;
+import main.base.ordering.Ballot;
 import main.base.rules.VotingRule;
+import main.base.session.Session;
 
 /**
- * TerminalResultAdaptor
+ * SessionStringWriter
  * 
  * Adaptor from SessionResult to String.
  * Given a SessionResult, produce a multiline String to output the results
  * of the voting for each question and rule, as well as the vote selection criterion used.
  *
  */
-public class SessionResultStringAdaptor {
+public class SessionStringWriter {
 	/**
 	 * Helper strings for printing the output
 	 */
@@ -26,18 +26,19 @@ public class SessionResultStringAdaptor {
 	 * Given a SessionResult, produce a multiline String to output the results
 	 * of the voting for each question and rule, as well as the vote selection
 	 * criterion used.
-	 * @param sessionResult
-	 * @return
+	 * @param sessionResult SessionResult
+	 * @return sessionResult String
 	 */
-	public static String buildOutput(SessionResult sessionResult) {
+	public static String write(Session session) {
+		if (session == null)
+			return null;
 		StringBuilder output = new StringBuilder();
 		output.append(dashedLine);
-		output.append("Criterion: " + sessionResult.getCriterion().toString() + newLine);
+		if (session.getCommand() != null && session.getCommand().getCriterion() != null)
+			output.append("Criterion: " + session.getCommand().getCriterion().toString() + newLine);
 		output.append(dashedLine);
-
-		for (Question q : sessionResult.getQuestions())
-			buildOutputForQuestion(q, sessionResult, output);
-		
+		for (Question q : session.getInput().getQuestions())
+			buildOutputForQuestion(q, session, output);
 		return output.toString();
 	}
 
@@ -48,16 +49,16 @@ public class SessionResultStringAdaptor {
 	 * @param sessionResult
 	 * @param output
 	 */
-	private static void buildOutputForQuestion(Question q, SessionResult sessionResult, StringBuilder output) {
+	private static void buildOutputForQuestion(Question q, Session session, StringBuilder output) {
 		output.append("Question: '" + q.getDescription() + "'" + newLine + dashedLine + newLine);
 		output.append(tab + "Votes:" + newLine);
 		// Take votes and get ranking
-		for (Vote v : sessionResult.getValidVotes().get(q))
+		for (Vote v : session.getResult().getValidVotes().get(q))
 			output.append(tab + tab + v + newLine);
 		output.append(newLine);
 		// Run each voting rule and print the output
-		for (VotingRule rule : sessionResult.getVotingRules())
-			buildOutputForQuestionAndRule(output, rule, sessionResult.getResults().get(q).get(rule));
+		for (VotingRule rule : session.getCommand().getRules())
+			buildOutputForQuestionAndRule(output, rule, session.getResult().getResults().get(q).get(rule));
 		output.append(dashedLine);
 	}
 	

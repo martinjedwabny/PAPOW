@@ -1,11 +1,15 @@
 package main.base;
 
+import java.io.Serializable;
 import java.util.Map;
+
+import main.base.ordering.Ballot;
 
 /**
  * Vote
  */
-public class Vote {
+public class Vote implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private Voter voter;
 	private Ballot ranking;

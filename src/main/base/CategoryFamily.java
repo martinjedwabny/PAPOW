@@ -1,8 +1,11 @@
 package main.base;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class CategoryFamily {
+public class CategoryFamily implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The name of the family of categories (example: Country)
 	 */

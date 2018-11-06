@@ -3,6 +3,7 @@ package main.io.criterion;
 import java.util.Map;
 
 public class CriterionEmpty extends Criterion {
+	private static final long serialVersionUID = 1L;
 
 	/* 
 	 * Always returns true

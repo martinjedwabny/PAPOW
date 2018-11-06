@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import main.base.Alternative;
-import main.base.Ballot;
+import main.base.ordering.Ballot;
 
  /**
  * Instant Runoff:
@@ -18,7 +18,8 @@ import main.base.Ballot;
  * they were eliminated.
  */
 public class InstantRunoff extends IterativeVotingRule {
-	
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * the list of ordered set of alternatives to output. Lower order means better final ranking.
 	 */

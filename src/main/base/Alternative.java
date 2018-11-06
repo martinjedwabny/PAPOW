@@ -1,6 +1,10 @@
 package main.base;
 
-public class Alternative {
+import java.io.Serializable;
+
+public class Alternative implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * Name of the alternative
 	 */

@@ -1,9 +1,12 @@
 package main.base;
 
+import java.io.Serializable;
+
 /**
  * Voter
  */
-public class Voter {
+public class Voter implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private String name;
 

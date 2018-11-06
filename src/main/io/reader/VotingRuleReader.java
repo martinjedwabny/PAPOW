@@ -1,4 +1,4 @@
-package main.io.parser;
+package main.io.reader;
 
 import main.base.rules.VotingRule;
 import main.base.rules.iterative.InstantRunoff;
@@ -8,14 +8,14 @@ import main.base.rules.scoring.BordaPessimistic;
 import main.base.rules.scoring.Copeland;
 import main.base.rules.scoring.KApproval;
 
-public class VotingRuleParser {
+public class VotingRuleReader {
 	/**
 	 * Given a rule specified as a String code,
 	 * construct the object representing that rule.
 	 * @param ruleCode
 	 * @return rule Object representing the rule
 	 */
-	public static VotingRule parseRule(String ruleCode) {
+	public static VotingRule read(String ruleCode) {
 		if (ruleCode.equals("pb"))
 			return new BordaPessimistic();
 		if (ruleCode.equals("ir"))

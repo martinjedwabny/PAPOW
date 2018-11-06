@@ -1,6 +1,7 @@
 package main.base.rules.scoring;
 
 public class BordaPessimistic extends PositionalScoringRule {
+	private static final long serialVersionUID = 1L;
 
 	/* Takes the amount of alternatives that are lesser, greater and equally ranked as itself
 	 * as well as the rank of the alternative as outputs the score:

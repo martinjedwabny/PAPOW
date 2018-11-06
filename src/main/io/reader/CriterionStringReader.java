@@ -1,4 +1,4 @@
-package main.io.parser;
+package main.io.reader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import main.io.criterion.CriterionEmpty;
 import main.io.criterion.CriterionEquals;
 import main.io.criterion.CriterionOr;
 
-public class CriterionParser {
+public class CriterionStringReader {
 
 	/**
 	 * Given a criterion for filtering votes represented as a String,
@@ -19,7 +19,7 @@ public class CriterionParser {
 	 * @param scriteria String representing the criterion
 	 * @return criterion specified
 	 */
-	public static Criterion parseCriterion(String scriteria) {
+	public static Criterion read(String scriteria) {
 		if (scriteria == null)
 			return new CriterionEmpty();
 		CriterionOr criterion = new CriterionOr();

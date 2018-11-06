@@ -4,6 +4,7 @@ import java.util.Vector;
 import java.util.Map;
 
 public class CriterionOr extends Criterion {
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Subcriteria that compose the 'OR' clause.

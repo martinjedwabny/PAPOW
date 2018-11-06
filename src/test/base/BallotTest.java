@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import junit.framework.Assert;
 import main.base.Alternative;
-import main.base.Ballot;
+import main.base.ordering.Ballot;
 
 public class BallotTest {
 	Alternative a = new Alternative("a");

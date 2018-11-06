@@ -1,8 +1,22 @@
-package main.base;
+package main.base.session;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Session {
+import main.base.CategoryFamily;
+import main.base.Question;
+import main.base.Vote;
+import main.base.Voter;
+
+/**
+ * SessionInput
+ * 
+ * The session data to be processed by voting rules.
+ * Stores the static data to be loaded and used.
+ *
+ */
+public class SessionInput implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private Vector<Question> questions;
 	private Vector<Vote> votes;
@@ -10,13 +24,24 @@ public class Session {
 	private Vector<CategoryFamily> families;
 	
 	/**
+	 * Empty constructor
+	 */
+	public SessionInput() {
+		super();
+		this.questions = new Vector<Question>();
+		this.votes = new Vector<Vote>();
+		this.voters = new Vector<Voter>();
+		this.families = new Vector<CategoryFamily>();
+	}
+
+	/**
 	 * Default constructor
 	 * @param questions
 	 * @param votes
 	 * @param voters
 	 * @param families
 	 */
-	public Session(Vector<Question> questions, Vector<Vote> votes, Vector<Voter> voters,
+	public SessionInput(Vector<Question> questions, Vector<Vote> votes, Vector<Voter> voters,
 			Vector<CategoryFamily> families) {
 		super();
 		this.questions = questions;

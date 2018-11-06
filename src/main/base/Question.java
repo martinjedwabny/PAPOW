@@ -1,9 +1,12 @@
 package main.base;
 
+import java.io.Serializable;
 import java.util.Set;
 import java.util.Vector;
 
-public class Question {
+public class Question implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String description;
 	private Vector<Alternative> alternatives;
 	private Set<Vote> votes;
