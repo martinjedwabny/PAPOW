@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import main.base.criterion.Criterion;
 import main.base.rules.VotingRule;
 import main.base.session.SessionCommand;
-import main.io.criterion.Criterion;
 
-public class SessionCommandStringReader {
+public class SessionCommandReader {
 
 	private static String inputPathKey = "-f";
 	private static String outputPathKey = "-o";
@@ -87,6 +87,6 @@ public class SessionCommandStringReader {
 	 * @return criterion specified
 	 */
 	private static Criterion parseCriterion(String criterion) {
-		return CriterionStringReader.read(criterion);
+		return CriterionReader.read(criterion);
 	}
 }

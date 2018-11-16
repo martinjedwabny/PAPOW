@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 import main.base.Question;
 import main.base.Vote;
+import main.base.criterion.Criterion;
 import main.base.ordering.Ballot;
 import main.base.rules.VotingRule;
-import main.io.criterion.Criterion;
 
 public class SessionRunner {
 	/**

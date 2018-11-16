@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
 
+import main.base.criterion.Criterion;
+import main.base.criterion.CriterionEmpty;
 import main.base.rules.VotingRule;
-import main.io.criterion.Criterion;
-import main.io.criterion.CriterionEmpty;
 
 /**
  * SessionCommand

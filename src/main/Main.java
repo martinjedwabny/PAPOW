@@ -9,9 +9,9 @@ import main.base.session.Session;
 import main.base.session.SessionCommand;
 import main.base.session.SessionResult;
 import main.base.session.SessionRunner;
-import main.io.reader.SessionCommandStringReader;
-import main.io.reader.SessionInputJsonReader;
-import main.io.reader.SessionObjectFileReader;
+import main.io.reader.SessionCommandReader;
+import main.io.reader.SessionInputReader;
+import main.io.reader.SessionReader;
 import main.io.writer.SessionObjectFileWriter;
 import main.io.writer.SessionStringFileWriter;
 import main.io.writer.SessionStringTerminalWriter;
@@ -59,9 +59,10 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 		//args = ("-f res/sample1.json -o res/sample1-out.o -v [co] -c [[(Color,Green)],[(Color,Red),(Country,Algeria)]]").split(" ");
-		args = ("-o res/sample1-out.txt -f res/sample1-out.o -v [co] -c [[(Color,Green)],[(Color,Red),(Country,Algeria)]]").split(" ");
+		//args = ("-o res/sample1-out.txt -f res/sample1-out.o -v [co] -c [[(Color,Green)],[(Color,Red),(Country,Algeria)]]").split(" ");
+		args = ("-f res/sample1-out.o -v [co] -c [[(Color,Green)],[(Color,Red),(Country,Algeria)]]").split(" ");
 		try {
-			SessionCommand command = SessionCommandStringReader.read(args);
+			SessionCommand command = SessionCommandReader.read(args);
 			Session session = loadSession(command);
 			saveSession(session, command);
 		} catch (FileNotFoundException ex) {
@@ -85,11 +86,11 @@ public class Main {
 		Session session = null;
 		// Load session
 		if (command.hasJsonInputFile()) {
-			SessionInput input = SessionInputJsonReader.read(command.getInputPath());
+			SessionInput input = SessionInputReader.read(command.getInputPath());
 			SessionResult result = SessionRunner.generateResults(input, command.getRules(), command.getCriterion());
 			session = new Session(input, command, result);
 		} else if (command.hasObjectInputFile()) {
-			session = SessionObjectFileReader.read(command.getInputPath());
+			session = SessionReader.read(command.getInputPath());
 		}
 		return session;
 	}

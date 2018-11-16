@@ -1,32 +1,31 @@
-package main.io.criterion;
+package main.base.criterion;
 
 import java.util.Vector;
 import java.util.Map;
 
-public class CriterionOr extends Criterion {
+public class CriterionAnd extends Criterion {
 	private static final long serialVersionUID = 1L;
-	
 	/**
-	 * Subcriteria that compose the 'OR' clause.
+	 * Subcriteria that compose the 'AND' clause.
 	 * 
 	 * If the subcriteria are [s1,s2,...,sn],
-	 * This criterion represents: s1 or s2 or ... or sn.
+	 * This criterion represents: s1 and s2 and ... and sn.
 	 */
 	private Vector<Criterion> subcriteria;
 
 	/**
-	 * Default empty constructor.
+	 * Default empty constructor
 	 */
-	public CriterionOr() {
+	public CriterionAnd() {
 		super();
 		this.subcriteria = new Vector<Criterion>();
 	}
 
-	/**
-	 * Default filled constructor.
+	/** 
+	 * Default filled constructor
 	 * @param subcriteria
 	 */
-	public CriterionOr(Vector<Criterion> subcriteria) {
+	public CriterionAnd(Vector<Criterion> subcriteria) {
 		super();
 		this.subcriteria = subcriteria;
 	}
@@ -34,26 +33,26 @@ public class CriterionOr extends Criterion {
 	/** 
 	 * Takes a profile and returns true iff the condition is satisfied
 	 * @param profile the key value map to compare
-	 * @return b s1 or s2 or ... or sn.
+	 * @return b s1 and s2 and ... and sn.
 	 */
 	@Override
 	public Boolean satisfies(Map<String, String> profile) {
 		if (this.subcriteria.isEmpty())
-			return true;
+			return false;
 		for (Criterion c : this.subcriteria)
-			if (c.satisfies(profile))
-				return true;
-		return false;
+			if (!c.satisfies(profile))
+				return false;
+		return true;
 	}
 	
 	/**
-	 * Add a criterion to the subcriteria
-	 * @param c the criterion to add
+	 * Add a criterion to the 'AND' clause
+	 * @param c criterion
 	 */
 	public void addCriterion(Criterion c) {
 		this.subcriteria.addElement(c);
-	}	
-	
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -61,13 +60,13 @@ public class CriterionOr extends Criterion {
 	public String toString() {
 		String ans = "";
 		if (this.subcriteria.isEmpty())
-			ans = "EmptyOr";
+			ans = "EmptyAnd";
 		else {
 			ans = "(";
 			for (int i = 0; i < this.subcriteria.size(); i++) {
 				ans += this.subcriteria.get(i);
 				if (i < this.subcriteria.size()-1)
-					ans += " or ";
+					ans += " and ";
 			}
 			ans += ")";
 		}

@@ -18,7 +18,7 @@ import main.base.*;
 import main.base.ordering.Ballot;
 import main.base.session.SessionInput;
 
-public class SessionInputJsonReader {
+public class SessionInputReader {
 	
 	/**
 	 * Given the name of a json file, read the json and create a voting session that represents the input in it.

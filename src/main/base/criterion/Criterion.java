@@ -1,4 +1,4 @@
-package main.io.criterion;
+package main.base.criterion;
 
 import java.io.Serializable;
 import java.util.Map;

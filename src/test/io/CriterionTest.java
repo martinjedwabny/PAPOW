@@ -9,7 +9,7 @@ import java.util.Vector;
 import org.junit.Assert;
 import org.junit.Test;
 
-import main.io.criterion.*;
+import main.base.criterion.*;
 
 public class CriterionTest {
 

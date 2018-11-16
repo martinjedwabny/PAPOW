@@ -31,4 +31,8 @@
   		<version>1.1.1</version>
   	</dependency>
   </dependencies>
+  <packaging>pom</packaging>
+  <name>voting</name>
+  <description>Main voting maven project.
+Contains base classes, voting rules and the ability of loading and saving sessions.</description>
 </project>

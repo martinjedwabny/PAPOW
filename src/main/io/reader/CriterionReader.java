@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import main.io.criterion.Criterion;
-import main.io.criterion.CriterionAnd;
-import main.io.criterion.CriterionEmpty;
-import main.io.criterion.CriterionEquals;
-import main.io.criterion.CriterionOr;
+import main.base.criterion.Criterion;
+import main.base.criterion.CriterionAnd;
+import main.base.criterion.CriterionEmpty;
+import main.base.criterion.CriterionEquals;
+import main.base.criterion.CriterionOr;
 
-public class CriterionStringReader {
+public class CriterionReader {
 
 	/**
 	 * Given a criterion for filtering votes represented as a String,

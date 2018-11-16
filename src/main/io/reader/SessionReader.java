@@ -8,7 +8,7 @@ import main.base.session.SessionCommand;
 import main.base.session.SessionInput;
 import main.base.session.SessionResult;
 
-public class SessionObjectFileReader {
+public class SessionReader {
 	public static Session read(String fileName) {
 		Session session = null;
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {

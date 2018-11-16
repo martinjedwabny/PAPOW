@@ -1,31 +1,32 @@
-package main.io.criterion;
+package main.base.criterion;
 
 import java.util.Vector;
 import java.util.Map;
 
-public class CriterionAnd extends Criterion {
+public class CriterionOr extends Criterion {
 	private static final long serialVersionUID = 1L;
+	
 	/**
-	 * Subcriteria that compose the 'AND' clause.
+	 * Subcriteria that compose the 'OR' clause.
 	 * 
 	 * If the subcriteria are [s1,s2,...,sn],
-	 * This criterion represents: s1 and s2 and ... and sn.
+	 * This criterion represents: s1 or s2 or ... or sn.
 	 */
 	private Vector<Criterion> subcriteria;
 
 	/**
-	 * Default empty constructor
+	 * Default empty constructor.
 	 */
-	public CriterionAnd() {
+	public CriterionOr() {
 		super();
 		this.subcriteria = new Vector<Criterion>();
 	}
 
-	/** 
-	 * Default filled constructor
+	/**
+	 * Default filled constructor.
 	 * @param subcriteria
 	 */
-	public CriterionAnd(Vector<Criterion> subcriteria) {
+	public CriterionOr(Vector<Criterion> subcriteria) {
 		super();
 		this.subcriteria = subcriteria;
 	}
@@ -33,26 +34,26 @@ public class CriterionAnd extends Criterion {
 	/** 
 	 * Takes a profile and returns true iff the condition is satisfied
 	 * @param profile the key value map to compare
-	 * @return b s1 and s2 and ... and sn.
+	 * @return b s1 or s2 or ... or sn.
 	 */
 	@Override
 	public Boolean satisfies(Map<String, String> profile) {
 		if (this.subcriteria.isEmpty())
-			return false;
+			return true;
 		for (Criterion c : this.subcriteria)
-			if (!c.satisfies(profile))
-				return false;
-		return true;
+			if (c.satisfies(profile))
+				return true;
+		return false;
 	}
 	
 	/**
-	 * Add a criterion to the 'AND' clause
-	 * @param c criterion
+	 * Add a criterion to the subcriteria
+	 * @param c the criterion to add
 	 */
 	public void addCriterion(Criterion c) {
 		this.subcriteria.addElement(c);
-	}
-
+	}	
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -60,13 +61,13 @@ public class CriterionAnd extends Criterion {
 	public String toString() {
 		String ans = "";
 		if (this.subcriteria.isEmpty())
-			ans = "EmptyAnd";
+			ans = "EmptyOr";
 		else {
 			ans = "(";
 			for (int i = 0; i < this.subcriteria.size(); i++) {
 				ans += this.subcriteria.get(i);
 				if (i < this.subcriteria.size()-1)
-					ans += " and ";
+					ans += " or ";
 			}
 			ans += ")";
 		}
