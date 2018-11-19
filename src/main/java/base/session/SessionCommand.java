@@ -75,37 +75,6 @@ public class SessionCommand implements Serializable {
 	public Criterion getCriterion() {
 		return criterion;
 	}
-	
-	/**
-	 * @return true iff the file path refers to a json file
-	 */
-	public Boolean hasJsonInputFile () {
-		return inputPath != null && inputPath != "" && 
-				inputPath.indexOf('.') != -1 && 
-				inputPath.substring(inputPath.lastIndexOf('.')).equals(".json");
-	}
-
-	/**
-	 * @return true iff the file path refers to an object file
-	 */
-	public Boolean hasObjectInputFile () {
-		return inputPath != null && inputPath != "" && !hasJsonInputFile();
-	}
-
-	/**
-	 * @return true iff there is an output path specified
-	 */
-	public Boolean hasTxtOutputPath () {
-		return outputPath != null && outputPath != "" && 
-				outputPath.indexOf('.') != -1 && 
-						outputPath.substring(outputPath.lastIndexOf('.')).equals(".txt");
-	}
-	/**
-	 * @return true iff there is an output path specified
-	 */
-	public Boolean hasOutputPath () {
-		return outputPath != null && outputPath != "" && !hasTxtOutputPath();
-	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

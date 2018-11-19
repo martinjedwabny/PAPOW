@@ -10,6 +10,7 @@ public class Session implements Serializable {
 	SessionResult result;
 	
 	/**
+	 * Default constructor
 	 * @param input
 	 * @param command
 	 * @param result
@@ -19,6 +20,16 @@ public class Session implements Serializable {
 		this.input = input;
 		this.command = command;
 		this.result = result;
+	}
+
+	/**
+	 * Empty constructor
+	 */
+	public Session() {
+		super();
+		this.input = new SessionInput();
+		this.command = new SessionCommand();
+		this.result = new SessionResult();
 	}
 
 	/**
@@ -40,5 +51,26 @@ public class Session implements Serializable {
 	 */
 	public SessionResult getResult() {
 		return result;
+	}
+
+	/**
+	 * @param input the input to set
+	 */
+	public void setInput(SessionInput input) {
+		this.input = input;
+	}
+
+	/**
+	 * @param command the command to set
+	 */
+	public void setCommand(SessionCommand command) {
+		this.command = command;
+	}
+
+	/**
+	 * @param result the result to set
+	 */
+	public void setResult(SessionResult result) {
+		this.result = result;
 	}
 }

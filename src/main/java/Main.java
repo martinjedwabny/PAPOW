@@ -6,15 +6,10 @@ import org.json.simple.parser.ParseException;
 
 import main.java.base.session.Session;
 import main.java.base.session.SessionCommand;
-import main.java.base.session.SessionInput;
-import main.java.base.session.SessionResult;
 import main.java.base.session.SessionRunner;
 import main.java.io.reader.SessionCommandReader;
-import main.java.io.reader.SessionInputReader;
 import main.java.io.reader.SessionReader;
-import main.java.io.writer.SessionObjectFileWriter;
-import main.java.io.writer.SessionStringFileWriter;
-import main.java.io.writer.SessionStringTerminalWriter;
+import main.java.io.writer.SessionWriter;
 
 /**
  * Main
@@ -51,20 +46,19 @@ public class Main {
 	 * 		[[(A,B),(C,D)],[(E,F)]] array of array of pairs, translates as (A=B and C=D) or (E=F)
 	 * 
 	 * 	Example :
-	 * 		-f res/sample1.json -v [pb,fb,k2] -c [[(Color,Red),(Country,Algeria)]]
+	 * 		-f src/main/res/sample.json -v [pb,fb,k2] -c [[(Color,Red),(Country,Algeria)]]
 	 * 
 	 * @param args
 	 * @throws Exception
 	 */
 
 	public static void main(String[] args) throws Exception {
-		//args = ("-f res/sample1.json -o res/sample1-out.o -v [co] -c [[(Color,Green)],[(Color,Red),(Country,Algeria)]]").split(" ");
-		//args = ("-o res/sample1-out.txt -f res/sample1-out.o -v [co] -c [[(Color,Green)],[(Color,Red),(Country,Algeria)]]").split(" ");
-		args = ("-f res/sample1-out.o -v [co] -c [[(Color,Green)],[(Color,Red),(Country,Algeria)]]").split(" ");
 		try {
 			SessionCommand command = SessionCommandReader.read(args);
-			Session session = loadSession(command);
-			saveSession(session, command);
+			Session session = SessionReader.read(command.getInputPath());
+			session.setCommand(command);
+			session.setResult(SessionRunner.generateResults(session.getInput(), command.getRules(), command.getCriterion()));
+			SessionWriter.write(session, command.getOutputPath());
 		} catch (FileNotFoundException ex) {
 			System.out.println("Error: File doesn't exists.");
 		} catch (IOException e) {
@@ -74,39 +68,4 @@ public class Main {
 		}
 	}
 
-	/**
-	 * Loads a session from a command
-	 * @param command
-	 * @return session
-	 * @throws FileNotFoundException
-	 * @throws IOException
-	 * @throws ParseException
-	 */
-	public static Session loadSession(SessionCommand command) throws FileNotFoundException, IOException, ParseException {
-		Session session = null;
-		// Load session
-		if (command.hasJsonInputFile()) {
-			SessionInput input = SessionInputReader.read(command.getInputPath());
-			SessionResult result = SessionRunner.generateResults(input, command.getRules(), command.getCriterion());
-			session = new Session(input, command, result);
-		} else if (command.hasObjectInputFile()) {
-			session = SessionReader.read(command.getInputPath());
-		}
-		return session;
-	}
-	
-	/**
-	 * Saves the session and/or results
-	 * @param session
-	 * @param command
-	 */
-	private static void saveSession(Session session, SessionCommand command) {
-		if (command.hasTxtOutputPath())
-			SessionStringFileWriter.write(session, command.getOutputPath());
-		else if (command.hasOutputPath())
-			SessionObjectFileWriter.write(session, command.getOutputPath());
-		else
-			SessionStringTerminalWriter.write(session);
-	}
-	
 }

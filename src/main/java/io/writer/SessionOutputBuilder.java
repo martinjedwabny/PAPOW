@@ -7,14 +7,14 @@ import main.java.base.rules.VotingRule;
 import main.java.base.session.Session;
 
 /**
- * SessionStringWriter
+ * SessionOutputBuilder
  * 
  * Adaptor from SessionResult to String.
  * Given a SessionResult, produce a multiline String to output the results
  * of the voting for each question and rule, as well as the vote selection criterion used.
  *
  */
-public class SessionStringWriter {
+public class SessionOutputBuilder {
 	/**
 	 * Helper strings for printing the output
 	 */
@@ -29,7 +29,7 @@ public class SessionStringWriter {
 	 * @param sessionResult SessionResult
 	 * @return sessionResult String
 	 */
-	public static String write(Session session) {
+	public static String buildOutput(Session session) {
 		if (session == null)
 			return null;
 		StringBuilder output = new StringBuilder();

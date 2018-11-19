@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>voting</groupId>
-  <artifactId>voting</artifactId>
+  <groupId>com.martinjedwabny.baal</groupId>
+  <artifactId>baal</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -32,7 +32,13 @@
   	</dependency>
   </dependencies>
   <packaging>pom</packaging>
-  <name>voting</name>
-  <description>Main voting maven project.
+  <name>BAAL</name>
+  <description>BAAL - Ballot Aggregation for ALternatives.
+Main voting maven project.
 Contains base classes, voting rules and the ability of loading and saving sessions.</description>
+  <url>https://github.com/martinjedwabny/baal</url>
+  <organization>
+  	<url>https://github.com/martinjedwabny/baal</url>
+  	<name>martinjedwabny</name>
+  </organization>
 </project>
