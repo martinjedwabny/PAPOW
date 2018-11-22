@@ -43,6 +43,7 @@ public class SessionInputReader {
 		Vector<Vote> votes = new Vector<Vote>();
 		Vector<Voter> voters = new Vector<Voter>();
 		Vector<CategoryFamily> families = new Vector<CategoryFamily>();
+		Vector<Alternative> alternatives = new Vector<Alternative>();
 
         // Parsing file "JSONExample.json"
 		JSONObject json = getJsonFromFile(jsonName);
@@ -61,10 +62,10 @@ public class SessionInputReader {
 		Map<Integer, Category> categoryHash = new HashMap<Integer, Category>();
 
 		// Parse each array of items
-		parseJSonObjectsAndFillResults(questions, votes, voters, families, questionHash, alternativeHash, voterHash,
+		parseJSonObjectsAndFillResults(questions, votes, voters, families, alternatives, questionHash, alternativeHash, voterHash,
 				familyHash, categoryHash, questionsJ, votesJ, votersJ, categoryFamiliesJ);
 		
-		return new SessionInput(questions, votes, voters, families);
+		return new SessionInput(questions, votes, voters, families, alternatives);
 	}
 	
 	/**
@@ -94,6 +95,7 @@ public class SessionInputReader {
 	 * @param votes to be filled.
 	 * @param voters to be filled.
 	 * @param families to be filled.
+	 * @param alternatives to be filled.
 	 * 
 	 * @param questionHash id references.
 	 * @param alternativeHash id references.
@@ -107,12 +109,12 @@ public class SessionInputReader {
 	 * @param categoryFamiliesJ JSONObject.
 	 */
 	private static void parseJSonObjectsAndFillResults(Vector<Question> questions, Vector<Vote> votes, Vector<Voter> voters,
-			Vector<CategoryFamily> families, Map<Integer, Question> questionHash,
+			Vector<CategoryFamily> families, Vector<Alternative> alternatives, Map<Integer, Question> questionHash,
 			Map<Integer, Alternative> alternativeHash, Map<Integer, Voter> voterHash,
 			Map<Integer, CategoryFamily> familyHash, Map<Integer, Category> categoryHash, JSONArray questionsJ,
 			JSONArray votesJ, JSONArray votersJ, JSONArray categoryFamiliesJ) {
 		for(Object o: questionsJ)
-			questions.add(readQuestion((JSONObject)o, alternativeHash, questionHash));
+			questions.add(readQuestion((JSONObject)o, alternativeHash, questionHash, alternatives));
 		for(Object o: votersJ)
 			voters.add(readVoter((JSONObject)o, voterHash));
 		for(Object o: categoryFamiliesJ)
@@ -216,20 +218,21 @@ public class SessionInputReader {
 	 * @param o JSONObject.
 	 * @param questionHash id references.
 	 * @param alternativeHash id references.
+	 * @param alternatives.
 	 * @return the question as an object.
 	 */
 	private static Question readQuestion (JSONObject o, Map<Integer, Alternative> alternativeHash, 
-			Map<Integer, Question> questionHash) {
+			Map<Integer, Question> questionHash, Vector<Alternative> alternatives) {
 		Integer id = ((Long) o.get("id")).intValue();
 		String desc = o.get("description").toString();
 		JSONArray altJ = (JSONArray)o.get("alternatives");
-		Vector<Alternative> alternatives = new Vector<Alternative>(); 
+		Vector<Alternative> questionAlternatives = new Vector<Alternative>(); 
 		Set<Vote> votes = new HashSet<Vote>();
 		for(Object a: altJ) {
-			Alternative alt = readAlternative((JSONObject)a, alternativeHash);
-			alternatives.add(alt);
+			Alternative alt = readAlternative((JSONObject)a, alternativeHash, alternatives);
+			questionAlternatives.add(alt);
 		}
-		Question ans = new Question(desc, alternatives, votes);
+		Question ans = new Question(desc, questionAlternatives, votes);
 		questionHash.put(id, ans);
 		return ans;
 	}
@@ -239,13 +242,17 @@ public class SessionInputReader {
 	 * 
 	 * @param o JSONObject.
 	 * @param alternativeHash id references.
+	 * @param alternatives.
 	 * @return the alternative as an object.
 	 */
-	private static Alternative readAlternative(JSONObject o, Map<Integer, Alternative> alternativeHash) {
+	private static Alternative readAlternative(JSONObject o, Map<Integer, Alternative> alternativeHash, Vector<Alternative> alternatives) {
 		Integer idA = ((Long)(o).get("idAlternative")).intValue();
 		String name = o.get("name").toString();
 		Alternative alt = new Alternative(name);
-		alternativeHash.put(idA, alt);
+		if (!alternativeHash.containsKey(idA)) {
+			alternativeHash.put(idA, alt);
+			alternatives.addElement(alt);
+		}
 		return alt;
 	}
 	

@@ -20,7 +20,7 @@ public class SessionWriter {
 	public static void write(Session session, String outputPath) {
 		if (isTxtOutputPath(outputPath))
 			writeTxtFile(session, outputPath);
-		else if (hasOutputPath(outputPath))
+		else if (isObjectOutputPath(outputPath))
 			writeObjectFile(session, outputPath);
 		else
 			write(session);
@@ -65,7 +65,7 @@ public class SessionWriter {
 	}
 
 	/**
-	 * @return true iff there is an output path specified
+	 * @return true iff there is a .txt output path specified
 	 */
 	public static Boolean isTxtOutputPath (String outputPath) {
 		return outputPath != null && outputPath != "" && 
@@ -73,9 +73,11 @@ public class SessionWriter {
 						outputPath.substring(outputPath.lastIndexOf('.')).equals(".txt");
 	}
 	/**
-	 * @return true iff there is an output path specified
+	 * @return true iff there is a .ses output path specified
 	 */
-	public static Boolean hasOutputPath (String outputPath) {
-		return outputPath != null && outputPath != "" && !isTxtOutputPath(outputPath);
+	public static Boolean isObjectOutputPath (String outputPath) {
+		return outputPath != null && outputPath != "" && 
+				outputPath.indexOf('.') != -1 && 
+						outputPath.substring(outputPath.lastIndexOf('.')).equals(".ses");
 	}
 }

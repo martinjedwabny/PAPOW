@@ -61,6 +61,8 @@ public class SessionReader {
 	 * @return true iff the file path refers to an object file
 	 */
 	private static Boolean isObjectInputFile (String inputPath) {
-		return inputPath != null && inputPath != "" && !isJsonInputFile(inputPath);
+		return inputPath != null && inputPath != "" && 
+				inputPath.indexOf('.') != -1 && 
+				inputPath.substring(inputPath.lastIndexOf('.')).equals(".ses");
 	}
 }

@@ -3,6 +3,7 @@ package main.java.base.session;
 import java.io.Serializable;
 import java.util.Vector;
 
+import main.java.base.Alternative;
 import main.java.base.CategoryFamily;
 import main.java.base.Question;
 import main.java.base.Vote;
@@ -22,6 +23,7 @@ public class SessionInput implements Serializable {
 	private Vector<Vote> votes;
 	private Vector<Voter> voters;
 	private Vector<CategoryFamily> families;
+	private Vector<Alternative> alternatives;
 	
 	/**
 	 * Empty constructor
@@ -32,6 +34,7 @@ public class SessionInput implements Serializable {
 		this.votes = new Vector<Vote>();
 		this.voters = new Vector<Voter>();
 		this.families = new Vector<CategoryFamily>();
+		this.alternatives = new Vector<Alternative>();
 	}
 
 	/**
@@ -40,14 +43,16 @@ public class SessionInput implements Serializable {
 	 * @param votes
 	 * @param voters
 	 * @param families
+	 * @param alternatives
 	 */
 	public SessionInput(Vector<Question> questions, Vector<Vote> votes, Vector<Voter> voters,
-			Vector<CategoryFamily> families) {
+			Vector<CategoryFamily> families, Vector<Alternative> alternatives) {
 		super();
 		this.questions = questions;
 		this.votes = votes;
 		this.voters = voters;
 		this.families = families;
+		this.alternatives = alternatives;
 	}
 
 	/**
@@ -76,6 +81,13 @@ public class SessionInput implements Serializable {
 	 */
 	public Vector<CategoryFamily> getFamilies() {
 		return families;
+	}
+
+	/**
+	 * @return the alternatives
+	 */
+	public Vector<Alternative> getAlternatives() {
+		return alternatives;
 	}
 	
 }
