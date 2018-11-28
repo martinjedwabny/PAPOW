@@ -1,6 +1,7 @@
 package main.java.base;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
@@ -10,6 +11,16 @@ public class Question implements Serializable {
 	private String description;
 	private Vector<Alternative> alternatives;
 	private Set<Vote> votes;
+
+	/**
+	 * Empty constructor
+	 */
+	public Question() {
+		super();
+		this.description = "";
+		this.alternatives = new Vector<Alternative>();
+		this.votes = new HashSet<Vote>();
+	}
 	
 	/**
 	 * Default constructor
@@ -23,7 +34,7 @@ public class Question implements Serializable {
 		this.alternatives = alternatives;
 		this.votes = votes;
 	}
-	
+
 	/**
 	 * @return description
 	 */
