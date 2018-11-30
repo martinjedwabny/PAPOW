@@ -89,5 +89,55 @@ public class SessionInput implements Serializable {
 	public Vector<Alternative> getAlternatives() {
 		return alternatives;
 	}
+
+	/**
+	 * Add voter
+	 * @param voter
+	 */
+	public void addVoter(Voter voter) {
+		this.voters.add(voter);
+	}
+
+	/**
+	 * Remove voter from session input, along with any vote made by that voter in any question
+	 * @param voter
+	 */
+	public void removeVoter(Voter voter) {
+		this.voters.remove(voter);
+		this.questions.forEach(q -> q.getVotes().removeIf(vv ->vv.getVoter().equals(voter)));
+	}
+
+	/**
+	 * Add alternative
+	 * @param alternative
+	 */
+	public void addAlternative(Alternative alternative) {
+		this.alternatives.add(alternative);
+	}
+
+	/**
+	 * Remove alternative from session input, along with any appearance in any question
+	 * @param alternative
+	 */
+	public void removeAlternative(Alternative alternative) {
+		this.alternatives.remove(alternative);
+		this.questions.forEach(q -> q.getVotes().forEach(v -> v.getRanking().remove(alternative)));
+	}
+
+	/**
+	 * Add question
+	 * @param question
+	 */
+	public void addQuestion(Question question) {
+		this.questions.add(question);
+	}
+
+	/**
+	 * Remove question from session input
+	 * @param question
+	 */
+	public void removeQuestion(Question question) {
+		this.questions.remove(question);
+	}
 	
 }

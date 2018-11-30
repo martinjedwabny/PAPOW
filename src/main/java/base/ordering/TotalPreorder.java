@@ -1,10 +1,13 @@
 package main.java.base.ordering;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+
+import main.java.base.Alternative;
 
 /**
  * Total Preorder
@@ -80,6 +83,14 @@ public class TotalPreorder<T> implements Serializable {
 			effectiveRank += entry.getValue().size();
 		}
 		this.elementsForRank = groupByRank(this.rankForElement);
+	}
+
+	/**
+	 * Remove the element from the ballot
+	 * @param element
+	 */
+	public void remove(T element) {
+		removeAll(Collections.singleton(element));
 	}
 
 	/**

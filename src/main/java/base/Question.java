@@ -23,6 +23,17 @@ public class Question implements Serializable {
 	}
 	
 	/**
+	 * Description only constructor
+	 * @param description
+	 */
+	public Question(String description) {
+		super();
+		this.description = description;
+		this.alternatives = new Vector<Alternative>();
+		this.votes = new HashSet<Vote>();
+	}
+	
+	/**
 	 * Default constructor
 	 * @param description
 	 * @param alternatives
