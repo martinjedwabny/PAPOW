@@ -91,6 +91,41 @@ public class SessionInput implements Serializable {
 	}
 
 	/**
+	 * @param questions the questions to set
+	 */
+	public void setQuestions(Vector<Question> questions) {
+		this.questions = questions;
+	}
+
+	/**
+	 * @param votes the votes to set
+	 */
+	public void setVotes(Vector<Vote> votes) {
+		this.votes = votes;
+	}
+
+	/**
+	 * @param voters the voters to set
+	 */
+	public void setVoters(Vector<Voter> voters) {
+		this.voters = voters;
+	}
+
+	/**
+	 * @param families the families to set
+	 */
+	public void setFamilies(Vector<CategoryFamily> families) {
+		this.families = families;
+	}
+
+	/**
+	 * @param alternatives the alternatives to set
+	 */
+	public void setAlternatives(Vector<Alternative> alternatives) {
+		this.alternatives = alternatives;
+	}
+
+	/**
 	 * Add voter
 	 * @param voter
 	 */
@@ -121,7 +156,9 @@ public class SessionInput implements Serializable {
 	 */
 	public void removeAlternative(Alternative alternative) {
 		this.alternatives.remove(alternative);
-		this.questions.forEach(q -> q.getVotes().forEach(v -> v.getRanking().remove(alternative)));
+		this.questions.forEach(q -> {
+			q.removeAlternative(alternative);
+		});
 	}
 
 	/**

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 public class Question implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -45,6 +46,17 @@ public class Question implements Serializable {
 		this.alternatives = alternatives;
 		this.votes = votes;
 	}
+	
+	/**
+	 * Copy constructor
+	 * @param question
+	 */
+	public Question(Question question) {
+		super();
+		this.description = question.getDescription();
+		this.alternatives = new Vector<Alternative>(question.getAlternatives());
+		this.votes = question.getVotes().stream().map(Vote::new).collect(Collectors.toSet());
+	}
 
 	/**
 	 * @return description
@@ -54,10 +66,25 @@ public class Question implements Serializable {
 	}
 
 	/**
+	 * Set the description
+	 * @param description
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
 	 * @return alternatives
 	 */
 	public Vector<Alternative> getAlternatives() {
 		return alternatives;
+	}
+
+	/**
+	 * @param alternatives the alternatives to set
+	 */
+	public void setAlternatives(Vector<Alternative> alternatives) {
+		this.alternatives = alternatives;
 	}
 
 	/**
@@ -76,11 +103,14 @@ public class Question implements Serializable {
 	}
 
 	/**
-	 * Add an alternative
+	 * Add an alternative, also insert it as the last choice in every vote
 	 * @param a alternative to add
 	 */
 	public void addAlternative(Alternative a) {
-		alternatives.add(a);
+		if (!this.getAlternatives().contains(a)) {
+			votes.forEach(v -> v.getRanking().addLast(a));
+			alternatives.add(a);
+		}
 	}
 	
 	/**
@@ -97,6 +127,15 @@ public class Question implements Serializable {
 	 */
 	public void removeVote(Vote v) {
 		votes.remove(v);
+	}
+	
+	/**
+	 * Remove an alternative, along with any occurence in the votes
+	 * @param a alternative to remove
+	 */
+	public void removeAlternative(Alternative a) {
+		alternatives.removeIf(aa -> aa.equals(a));
+		votes.forEach(v -> v.getRanking().remove(a));
 	}
 	
 	/* (non-Javadoc)

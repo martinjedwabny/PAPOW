@@ -1,6 +1,7 @@
 package main.java.base;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 import main.java.base.ordering.Ballot;
@@ -27,6 +28,19 @@ public class Vote implements Serializable {
 		this.ranking = ranking;
 		this.categories = categories;
 	}
+	
+	/**
+	 * Copy constructor
+	 * @param voter
+	 * @param ranking
+	 * @param categories
+	 */
+	public Vote(Vote vote) {
+		super();
+		this.voter = vote.voter;
+		this.ranking = new Ballot(vote.getRanking());
+		this.categories = new HashMap<CategoryFamily, Category>(vote.getCategories());
+	}
 
 	/**
 	 * @return voter
@@ -40,6 +54,20 @@ public class Vote implements Serializable {
 	 */
 	public Ballot getRanking() {
 		return ranking;
+	}
+
+	/**
+	 * @param ranking the ranking to set
+	 */
+	public void setRanking(Ballot ranking) {
+		this.ranking = ranking;
+	}
+
+	/**
+	 * @param categories the categories to set
+	 */
+	public void setCategories(Map<CategoryFamily, Category> categories) {
+		this.categories = categories;
 	}
 
 	/**
