@@ -252,6 +252,8 @@ public class SessionInputReader {
 		if (!alternativeHash.containsKey(idA)) {
 			alternativeHash.put(idA, alt);
 			alternatives.addElement(alt);
+		} else {
+			alt = alternativeHash.get(idA);
 		}
 		return alt;
 	}
