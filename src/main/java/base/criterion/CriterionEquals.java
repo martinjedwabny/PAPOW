@@ -27,6 +27,20 @@ public class CriterionEquals extends Criterion {
 		return profile.containsKey(this.key) && profile.get(this.key).toLowerCase().equals(this.value.toLowerCase());
 	}
 
+	/**
+	 * @return the key
+	 */
+	public String getKey() {
+		return key;
+	}
+
+	/**
+	 * @return the value
+	 */
+	public String getValue() {
+		return value;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

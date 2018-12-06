@@ -31,6 +31,20 @@ public class KApproval extends PositionalScoringRule {
 		return rank <= k ? 1.0 : 0.0;
 	}
 	
+	/**
+	 * @return the k
+	 */
+	public Integer getK() {
+		return k;
+	}
+
+	/**
+	 * @param k the k to set
+	 */
+	public void setK(Integer k) {
+		this.k = k;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import main.java.base.criterion.Criterion;
-import main.java.base.criterion.CriterionEmpty;
+import main.java.base.criterion.CriterionTrue;
 import main.java.base.rules.VotingRule;
 
 /**
@@ -30,7 +30,7 @@ public class SessionCommand implements Serializable {
 		this.inputPath = null;
 		this.outputPath = null;
 		this.rules = new Vector<VotingRule>();
-		this.criterion = new CriterionEmpty();
+		this.criterion = new CriterionTrue();
 	}
 
 	/**
@@ -74,6 +74,34 @@ public class SessionCommand implements Serializable {
 	 */
 	public Criterion getCriterion() {
 		return criterion;
+	}
+
+	/**
+	 * @param inputPath the inputPath to set
+	 */
+	public void setInputPath(String inputPath) {
+		this.inputPath = inputPath;
+	}
+
+	/**
+	 * @param outputPath the outputPath to set
+	 */
+	public void setOutputPath(String outputPath) {
+		this.outputPath = outputPath;
+	}
+
+	/**
+	 * @param rules the rules to set
+	 */
+	public void setRules(List<VotingRule> rules) {
+		this.rules = rules;
+	}
+
+	/**
+	 * @param criterion the criterion to set
+	 */
+	public void setCriterion(Criterion criterion) {
+		this.criterion = criterion;
 	}
 
 	/* (non-Javadoc)

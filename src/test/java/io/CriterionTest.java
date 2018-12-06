@@ -25,7 +25,7 @@ public class CriterionTest {
 	/* Empty Criterion */
 	@Test
 	public void ShouldPassEmptyCriterion() {
-		Criterion c1 = new CriterionEmpty();
+		Criterion c1 = new CriterionTrue();
 		compareCriterionToPredicates(c1, new Boolean[] {true, true, true});
 	}
 	
@@ -71,7 +71,7 @@ public class CriterionTest {
 	/* Complex Criterion */
 	@Test
 	public void ShouldPassComplexCriterion() {
-		CriterionEmpty c1 = new CriterionEmpty();
+		CriterionTrue c1 = new CriterionTrue();
 		CriterionEquals c2 = new CriterionEquals("1", "1");
 		CriterionEquals c3 = new CriterionEquals("2", "2");
 		CriterionEquals c4 = new CriterionEquals("3", "3");

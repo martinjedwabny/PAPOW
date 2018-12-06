@@ -46,6 +46,13 @@ public class CriterionAnd extends Criterion {
 	}
 	
 	/**
+	 * @return the subcriteria
+	 */
+	public Vector<Criterion> getSubcriteria() {
+		return subcriteria;
+	}
+
+	/**
 	 * Add a criterion to the 'AND' clause
 	 * @param c criterion
 	 */

@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import main.java.base.criterion.Criterion;
 import main.java.base.criterion.CriterionAnd;
-import main.java.base.criterion.CriterionEmpty;
+import main.java.base.criterion.CriterionTrue;
 import main.java.base.criterion.CriterionEquals;
 import main.java.base.criterion.CriterionOr;
 
@@ -21,7 +21,7 @@ public class CriterionReader {
 	 */
 	public static Criterion read(String scriteria) {
 		if (scriteria == null)
-			return new CriterionEmpty();
+			return new CriterionTrue();
 		CriterionOr criterion = new CriterionOr();
 		List<String> criterias = stringArrayToArrayOfStrings(scriteria,'[',']');
 		for (String ssubcriteria : criterias) {
@@ -37,7 +37,7 @@ public class CriterionReader {
 						Criterion subsubcriterion = new CriterionEquals(family, category);
 						subcriterion.addCriterion(subsubcriterion);
 					} else {
-						subcriterion.addCriterion(new CriterionEmpty());
+						subcriterion.addCriterion(new CriterionTrue());
 					}
 				}
 			}

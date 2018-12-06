@@ -2,7 +2,7 @@ package main.java.base.criterion;
 
 import java.util.Map;
 
-public class CriterionEmpty extends Criterion {
+public class CriterionTrue extends Criterion {
 	private static final long serialVersionUID = 1L;
 
 	/* 
@@ -18,7 +18,7 @@ public class CriterionEmpty extends Criterion {
 	 */
 	@Override
 	public String toString() {
-		return "CriterionEmpty";
+		return "CriterionTrue";
 	}
 
 }

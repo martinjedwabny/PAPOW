@@ -47,6 +47,13 @@ public class CriterionOr extends Criterion {
 	}
 	
 	/**
+	 * @return the subcriteria
+	 */
+	public Vector<Criterion> getSubcriteria() {
+		return subcriteria;
+	}
+
+	/**
 	 * Add a criterion to the subcriteria
 	 * @param c the criterion to add
 	 */
