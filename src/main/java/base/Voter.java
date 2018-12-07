@@ -39,7 +39,7 @@ public class Voter implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Voter [" + name + "]";
+		return name;
 	}
 	
 }
