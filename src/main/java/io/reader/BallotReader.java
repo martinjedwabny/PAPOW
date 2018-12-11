@@ -19,12 +19,15 @@ public class BallotReader {
 	public static Ballot fromString(String ballotString, Map<String, Alternative> alternatives) {
 		Map<Alternative, Integer> rankForElement = new HashMap<Alternative, Integer>();
 		try {
-			Matcher m = Pattern.compile("[0-9]+=[^0-9,\\}]*").matcher(ballotString.replaceAll("\\s+",""));
+			Matcher m = Pattern.compile("[0-9]+=[^0-9\\}]*").matcher(ballotString.replaceAll("\\s+",""));
 			while (m.find()) {
 				String occur = m.group();
 				String[] rankAndArray = occur.split("=");
 				Integer rank = Integer.parseInt(rankAndArray[0]);
-				String[] elementArray = rankAndArray[1].substring(1, rankAndArray[1].length()-1).split(",");
+				String elementArrayString = rankAndArray[1];
+				String[] elementArray = elementArrayString.substring(
+						elementArrayString.indexOf("["), 
+						elementArrayString.indexOf("]")).split(",");
 				for (String elementString : elementArray)
 					rankForElement.put(alternatives.get(elementString), rank);
 			}

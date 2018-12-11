@@ -54,7 +54,7 @@ public class SessionRunner {
 			}
 		// Get results for each voting rule, parallelize computations
 		rules.parallelStream().forEach(rule -> {
-			votingResults.get(question).put(rule, new Ballot(rule.order(rankings)));
+			votingResults.get(question).put(rule, rule.order(rankings));
 		});
 	}
 

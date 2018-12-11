@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import main.java.base.Alternative;
 import main.java.base.ordering.Ballot;
+import main.java.base.rules.VotingRule;
 
  /**
  * Instant Runoff:
@@ -17,62 +18,33 @@ import main.java.base.ordering.Ballot;
  * When there are no more alternatives left, return the alternatives sorted by the reverse order in which
  * they were eliminated.
  */
-public class InstantRunoff extends IterativeVotingRule {
+public class InstantRunoff extends VotingRule {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * the list of ordered set of alternatives to output. Lower order means better final ranking.
+	/* 
+	 * Execute an iteration step (in which rankings are computed)
+	 * until a certain codition is achieved
 	 */
-	List<Set<Alternative>> answer;
-	
-	/**
-	 * the set of all alternatives eliminated by the iteration process so far.
-	 */
-	Set<Alternative> eliminated;
-	
-	 /**
-	 * 
-	 * the list of all current votes (this changes as in each iteration step, alternatives get eliminated).
-	 */
-	List<Ballot> votes;
-	
-	/**
-	 * wins the amount of wins for each alternative according to the current rankings.
-	 */
-	Map<Alternative, Integer> wins;
-	
-	/**
-	 * the amount of voters.
-	 */
-	Integer voterCount;
-	
-	/**
-	 * the amount of original alternatives.
-	 */
-	Integer alternativeCount;
-
-	/* (non-Javadoc)
-	 * @see voting.rules.iterative.IterativeVotingRule#order(java.util.List)
-	 */
-	@Override
 	public Ballot order(List<Ballot> rankings) {
 		// Check for empty
 		if (rankings.isEmpty() || rankings.get(0).getElementsCount() == 0)
 			return new Ballot(new HashMap<Alternative, Integer>());
 		// Not empty case, initialize properties
-		answer = new Vector<Set<Alternative>>();
-		eliminated = new HashSet<Alternative>();
-		votes = new ArrayList<Ballot>(rankings.size());
-		wins = new HashMap<Alternative, Integer>();
-		voterCount = rankings.size(); 
-		alternativeCount = rankings.get(0).getElementsCount();
+		Vector<Set<Alternative>> answer = new Vector<Set<Alternative>>();
+		HashSet<Alternative> eliminated = new HashSet<Alternative>();
+		ArrayList<Ballot> votes = new ArrayList<Ballot>(rankings.size());
+		HashMap<Alternative, Integer> wins = new HashMap<Alternative, Integer>();
+		Integer voterCount = rankings.size(); 
+		Integer alternativeCount = rankings.get(0).getElementsCount();
 		// Copy rankings
 		for (Ballot ballot : rankings)
 			votes.add(new Ballot(ballot));
 		// Fill winning indexes and votes
-		fillPropertiesWithInitialRankings(votes);
+		fillPropertiesWithInitialRankings(rankings, wins);
 		// Execute the voting
-		return super.order(votes);
+		while (!iterationFinished(eliminated, alternativeCount))
+			doIterationStep(answer, eliminated, wins, voterCount, votes);
+		return getFinalOrder(answer);
 	}
 
 	/**
@@ -80,7 +52,7 @@ public class InstantRunoff extends IterativeVotingRule {
 	 * Fill the object properties according to the initial voter rankings of alternatives
 	 * @param rankings the initial rankings submitted by the voters
 	 */
-	private void fillPropertiesWithInitialRankings(List<Ballot> rankings) {
+	private void fillPropertiesWithInitialRankings(List<Ballot> rankings, HashMap<Alternative, Integer> wins) {
 		for (Ballot ranking : rankings)
 			for (Alternative a : ranking.getElements(1))
 				wins.put(a, wins.getOrDefault(a, 0)+1);
@@ -91,12 +63,11 @@ public class InstantRunoff extends IterativeVotingRule {
 	 * Remove them from all the rankings
 	 * Recompute the wins for each voter
 	 */
-	@Override
-	public void doIterationStep() {
-		Set<Alternative> roundLosers = getLeastFirstPlaces();
+	public void doIterationStep(List<Set<Alternative>> answer, HashSet<Alternative> eliminated, HashMap<Alternative, Integer> wins, Integer voterCount, ArrayList<Ballot> votes) {
+		Set<Alternative> roundLosers = getLeastFirstPlaces(wins, voterCount);
 		answer.add(0, roundLosers);
 		eliminated.addAll(roundLosers);
-		recomputeWinsAndVotes(roundLosers);
+		recomputeWinsAndVotes(roundLosers, wins, votes);
 	}
 
 	/**
@@ -104,9 +75,9 @@ public class InstantRunoff extends IterativeVotingRule {
 	 * of each voter by eliminating the losers of this round as well as the previous ones
 	 * @param losers
 	 */
-	private void recomputeWinsAndVotes(Set<Alternative> roundLosers) {
-		wins = new HashMap<Alternative, Integer>();
-		for (Ballot ballot : this.votes) {
+	private void recomputeWinsAndVotes(Set<Alternative> roundLosers, HashMap<Alternative, Integer> wins, ArrayList<Ballot> votes) {
+		wins.clear();
+		for (Ballot ballot : votes) {
 			ballot.removeAll(roundLosers);
 			for (Alternative a : ballot.getElements(1))
 				wins.put(a, wins.getOrDefault(a, 0)+1);
@@ -118,7 +89,7 @@ public class InstantRunoff extends IterativeVotingRule {
 	 * Get the alternatives with the least amount of 1st places
 	 * @return alternative set containing the ones with the least amount of 1st places
 	 */
-	private Set<Alternative> getLeastFirstPlaces() {
+	private Set<Alternative> getLeastFirstPlaces(HashMap<Alternative, Integer> wins, Integer voterCount) {
 		Integer min = voterCount+1;
 		Set<Alternative> ans = new HashSet<Alternative>();
 		for (Alternative a : wins.keySet())
@@ -132,14 +103,13 @@ public class InstantRunoff extends IterativeVotingRule {
 		return ans;
 	}
 
-	/* (non-Javadoc)
-	 * @see voting.rules.iterative.IterativeVotingRule#getFinalOrder()
+	/** Gets the final order of alternatives
+	 * @return Ballot representing the final order
 	 */
-	@Override
-	public Ballot getFinalOrder() {
+	public Ballot getFinalOrder(List<Set<Alternative>> answer) {
 		Map<Alternative, Integer> rankForElement = new HashMap<Alternative, Integer>();
 		Integer rank = 1;
-		for (Set<Alternative> rankElements : this.answer) {
+		for (Set<Alternative> rankElements : answer) {
 			for (Alternative alternative : rankElements)
 				rankForElement.put(alternative, rank);
 			rank += rankElements.size();
@@ -147,11 +117,10 @@ public class InstantRunoff extends IterativeVotingRule {
 		return new Ballot(rankForElement);
 	}
 
-	/* (non-Javadoc)
-	 * @see voting.rules.iterative.IterativeVotingRule#iterationFinished()
+	/** Returns true iff a certain condition is achieved (all positions in the ranking are determined)
+	 * @return Boolean whether the iteration is finished
 	 */
-	@Override
-	protected Boolean iterationFinished() {
+	protected Boolean iterationFinished(HashSet<Alternative> eliminated, int alternativeCount) {
 		return eliminated.size() == alternativeCount;
 	}
 
