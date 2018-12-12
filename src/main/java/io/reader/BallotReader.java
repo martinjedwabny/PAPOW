@@ -2,6 +2,7 @@ package main.java.io.reader;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,26 +18,28 @@ public class BallotReader {
 	 * @param alternatives
 	 * @return ballot
 	 */
-	public static Ballot fromString(String ballotString, Map<String, Alternative> alternatives) {
+	public static Ballot fromString(String ballotString, Collection<Alternative> alternatives, Map<String, Alternative> nameToAlternative) {
 		Map<Alternative, Integer> rankForElement = new HashMap<Alternative, Integer>();
-		Collection<Alternative> alternativesLeft = alternatives.values();
+		LinkedHashSet<Alternative> alternativesLeft = new LinkedHashSet<Alternative>();
+		alternativesLeft.addAll(alternatives);
 		try {
 			Matcher m = Pattern.compile("[0-9]+=[^0-9\\}]*").matcher(ballotString.replaceAll("\\s+",""));
+			Integer rank = 1;
 			while (m.find()) {
 				String occur = m.group();
 				String[] rankAndArray = occur.split("=");
-				Integer rank = Integer.parseInt(rankAndArray[0]);
 				String elementArrayString = rankAndArray[1];
 				String[] elementArray = elementArrayString.substring(
 						elementArrayString.indexOf("[")+1, 
 						elementArrayString.indexOf("]")).split(",");
 				for (String elementString : elementArray) {
-					Alternative chosen = alternatives.get(elementString);
+					Alternative chosen = nameToAlternative.get(elementString);
 					if (chosen == null)
 						return null;
 					rankForElement.put(chosen, rank);
 					alternativesLeft.remove(chosen);
 				}
+				rank += elementArray.length;
 			}
 		} catch (Exception e) {
 			return null;
