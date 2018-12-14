@@ -32,7 +32,6 @@ public class BallotReader {
 				elementArrayString = elementArrayString.substring(
 						elementArrayString.indexOf("[")+1, 
 						elementArrayString.indexOf("]")).trim();
-				System.out.println(elementArrayString);
 				if (elementArrayString.isEmpty())
 					continue;
 				String[] elementArray = elementArrayString.split(",");
