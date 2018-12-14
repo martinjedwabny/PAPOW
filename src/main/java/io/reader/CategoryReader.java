@@ -21,13 +21,14 @@ public class CategoryReader {
 	public static Map<String, String> asMap(String categoriesString) {
 		Map<String, String> ans = new HashMap<String, String>();
 		try {
-			Matcher m = Pattern.compile("[^\\{,=]*=[^=,\\}]*").matcher(categoriesString.replaceAll("\\s+",""));
+			Matcher m = Pattern.compile("[^\\{,=]*=[^=,\\}]*").matcher(categoriesString.replaceAll("\\s+"," "));
 			while (m.find()) {
 				String occur = m.group();
 				String[] familyAndCategory = occur.split("=");
-				String familyString = familyAndCategory[0];
-				String categoryString = familyAndCategory[1];
-				ans.put(familyString, categoryString);
+				String familyString = familyAndCategory[0].trim();
+				String categoryString = familyAndCategory[1].trim();
+				if (!familyString.isEmpty() && !categoryString.isEmpty())
+					ans.put(familyString, categoryString);
 			}
 		} catch (Exception e) {
 			return null;
