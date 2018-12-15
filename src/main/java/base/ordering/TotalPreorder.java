@@ -3,6 +3,8 @@ package main.java.base.ordering;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -31,7 +33,7 @@ public class TotalPreorder<T> implements Serializable {
 	 * elementsForRank for each rank, the elements in the rank (for efficiency
 	 * purposes)
 	 */
-	protected Map<Integer, HashSet<T>> elementsForRank;
+	protected Map<Integer, Set<T>> elementsForRank;
 
 	/**
 	 * Constructor
@@ -57,13 +59,13 @@ public class TotalPreorder<T> implements Serializable {
 	 * @param rankForElement
 	 * @return elementsForRank
 	 */
-	private TreeMap<Integer, HashSet<T>> groupByRank(Map<T, Integer> rankForElement) {
-		TreeMap<Integer, HashSet<T>> elementsForRank = new TreeMap<Integer, HashSet<T>>();
-		rankForElement.entrySet().stream().sorted(Map.Entry.comparingByValue()).forEach((entry) -> {
+	protected Map<Integer, Set<T>> groupByRank(Map<T, Integer> rankForElement) {
+		Map<Integer, Set<T>> elementsForRank = new TreeMap<Integer, Set<T>>();
+		rankForElement.entrySet().stream().forEach((entry) -> {
 			T element = entry.getKey();
 			Integer rank = entry.getValue();
 			if (!elementsForRank.containsKey(rank))
-				elementsForRank.put(rank, new HashSet<T>());
+				elementsForRank.put(rank, new LinkedHashSet<T>());
 			elementsForRank.get(rank).add(element);
 		});
 		return elementsForRank;
@@ -80,7 +82,7 @@ public class TotalPreorder<T> implements Serializable {
 			this.rankForElement.remove(element);
 		}
 		Integer effectiveRank = 1;
-		for (Map.Entry<Integer, HashSet<T>> entry : this.elementsForRank.entrySet()) {
+		for (Map.Entry<Integer, Set<T>> entry : this.elementsForRank.entrySet()) {
 			if (entry.getKey() != effectiveRank)
 				for (T element : entry.getValue())
 					this.rankForElement.put(element, effectiveRank);

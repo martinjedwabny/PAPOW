@@ -3,6 +3,9 @@ package main.java.base.ordering;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import main.java.base.Alternative;
 
@@ -28,5 +31,18 @@ public class Ballot extends TotalPreorder<Alternative> implements Serializable {
 	 */
 	public Ballot(Ballot ballot) {
 		super(new HashMap<Alternative, Integer>(ballot.rankForElement));
+	}
+	
+	@Override
+	protected Map<Integer, Set<Alternative>> groupByRank(Map<Alternative, Integer> rankForElement) {
+		Map<Integer, Set<Alternative>> elementsForRank = new TreeMap<Integer, Set<Alternative>>();
+		rankForElement.entrySet().stream().forEach((entry) -> {
+			Alternative element = entry.getKey();
+			Integer rank = entry.getValue();
+			if (!elementsForRank.containsKey(rank))
+				elementsForRank.put(rank, new TreeSet<Alternative>((a1, a2) -> a1.getName().compareTo(a2.getName())));
+			elementsForRank.get(rank).add(element);
+		});
+		return elementsForRank;
 	}
 }
