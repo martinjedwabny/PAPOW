@@ -103,9 +103,9 @@ public class SessionCommand implements Serializable {
 	}
 
 	/**
-	 * @param criterion the criterion to set
+	 * @param criteria the criterion to set
 	 */
-	public void setCriterion(Set<Criterion> criteria) {
+	public void setCriteria(Set<Criterion> criteria) {
 		this.criteria = criteria;
 	}
 

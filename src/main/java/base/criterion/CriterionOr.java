@@ -68,13 +68,13 @@ public class CriterionOr extends Criterion {
 	public String toString() {
 		String ans = "";
 		if (this.subcriteria.isEmpty())
-			ans = "EmptyOr";
+			ans = "(EMPTY OR)";
 		else {
 			ans = "(";
 			for (int i = 0; i < this.subcriteria.size(); i++) {
 				ans += this.subcriteria.get(i);
 				if (i < this.subcriteria.size()-1)
-					ans += " or ";
+					ans += " OR ";
 			}
 			ans += ")";
 		}

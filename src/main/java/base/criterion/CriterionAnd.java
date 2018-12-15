@@ -67,13 +67,13 @@ public class CriterionAnd extends Criterion {
 	public String toString() {
 		String ans = "";
 		if (this.subcriteria.isEmpty())
-			ans = "EmptyAnd";
+			ans = "(EMPTY AND)";
 		else {
 			ans = "(";
 			for (int i = 0; i < this.subcriteria.size(); i++) {
 				ans += this.subcriteria.get(i);
 				if (i < this.subcriteria.size()-1)
-					ans += " and ";
+					ans += " AND ";
 			}
 			ans += ")";
 		}
