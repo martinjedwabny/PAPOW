@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Vector;
 
 import main.java.base.Alternative;
+import main.java.base.Category;
 import main.java.base.CategoryFamily;
 import main.java.base.Question;
 import main.java.base.Vote;
@@ -175,6 +176,33 @@ public class SessionInput implements Serializable {
 	 */
 	public void removeQuestion(Question question) {
 		this.questions.remove(question);
+	}
+
+	/**
+	 * Remove family from session input
+	 * @param family
+	 */
+	public void removeFamily(CategoryFamily family) {
+		this.getFamilies().remove(family);
+		for (Vote v : this.getVotes())
+			if (family != null && v.getCategories().containsKey(family))
+				v.getCategories().remove(family);
+	}
+
+	/**
+	 * Remove category from family in session input
+	 * @param family
+	 * @param category
+	 */
+	public void removeCategory(CategoryFamily family, Category category) {
+		if (family == null || !this.getFamilies().contains(family) || category == null || !family.getPossibilities().contains(category))
+			return;
+		for (Vote v : this.getVotes())
+			if (family != null && v.getCategories().containsKey(family) && category != null && v.getCategories().get(family).equals(category))
+				v.getCategories().remove(family);
+		family.getPossibilities().remove(category);
+		if (family.getPossibilities().isEmpty())
+			removeFamily(family);
 	}
 	
 }

@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
 
+import main.java.base.Category;
+import main.java.base.CategoryFamily;
+import main.java.base.Vote;
 import main.java.base.criterion.Criterion;
 import main.java.base.criterion.CriterionTrue;
 import main.java.base.rules.VotingRule;
@@ -110,5 +113,22 @@ public class SessionCommand implements Serializable {
 	@Override
 	public String toString() {
 		return "eCommand [inputPath=" + inputPath + ", outputPath=" + outputPath + ", rules=" + rules + "]";
+	}
+
+	/**
+	 * Remove family from session input
+	 * @param family
+	 */
+	public void removeFamily(CategoryFamily family) {
+		this.getCriterion().removeKey(family.getDescription());
+	}
+
+	/**
+	 * Remove category from family in session input
+	 * @param family
+	 * @param category
+	 */
+	public void removeCategory(CategoryFamily family, Category category) {
+		this.getCriterion().removeValue(family.getDescription(), category.getDescription());
 	}
 }

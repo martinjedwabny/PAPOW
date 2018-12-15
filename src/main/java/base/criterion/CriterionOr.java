@@ -81,4 +81,26 @@ public class CriterionOr extends Criterion {
 		return ans;
 	}
 
+	@Override
+	public void removeKey(String key) {
+		this.subcriteria.removeIf(c -> (c instanceof CriterionEquals) && ((CriterionEquals) c).getKey().equals(key));
+		this.subcriteria.forEach(c -> c.removeKey(key));
+	}
+
+	@Override
+	public void removeValue(String key, String value) {
+		this.subcriteria.removeIf(c -> (c instanceof CriterionEquals) && ((CriterionEquals) c).getKey().equals(key) && ((CriterionEquals) c).getValue().equals(value));
+		this.subcriteria.forEach(c -> c.removeValue(key, value));
+	}
+
+	@Override
+	public void updateKey(String oldKey, String newKey) {
+		this.subcriteria.forEach(c -> c.updateKey(oldKey, newKey));
+	}
+
+	@Override
+	public void updateValue(String oldKey, String oldValue, String newValue) {
+		this.subcriteria.forEach(c -> c.updateValue(oldKey, oldValue, newValue));
+	}
+
 }

@@ -49,4 +49,22 @@ public class CriterionEquals extends Criterion {
 		return this.key + "=" + this.value;
 	}
 
+	@Override
+	public void removeKey(String key) {}
+
+	@Override
+	public void removeValue(String key, String value) {}
+
+	@Override
+	public void updateKey(String oldKey, String newKey) {
+		if (this.key.equals(oldKey))
+			this.key = newKey;
+	}
+
+	@Override
+	public void updateValue(String oldKey, String oldValue, String newValue) {
+		if (this.key.equals(oldKey) && this.value.equals(oldValue))
+			this.value = newValue;
+	}
+
 }

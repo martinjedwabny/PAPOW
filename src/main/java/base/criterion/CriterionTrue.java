@@ -21,4 +21,16 @@ public class CriterionTrue extends Criterion {
 		return "CriterionTrue";
 	}
 
+	@Override
+	public void removeKey(String key) {}
+
+	@Override
+	public void removeValue(String key, String value) {}
+
+
+	@Override
+	public void updateKey(String oldKey, String newKey) {}
+
+	@Override
+	public void updateValue(String oldKey, String oldValue, String newValue) {}
 }

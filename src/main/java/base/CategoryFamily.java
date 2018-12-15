@@ -1,6 +1,7 @@
 package main.java.base;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class CategoryFamily implements Serializable {
@@ -26,7 +27,17 @@ public class CategoryFamily implements Serializable {
 		this.description = description;
 		this.possibilities = possibilities;
 	}
-	
+
+	/**
+	 * Only description constructor
+	 * @param description
+	 */
+	public CategoryFamily(String description) {
+		super();
+		this.description = description;
+		this.possibilities = new LinkedHashSet<>();
+	}
+
 	/**
 	 * @return description
 	 */
