@@ -57,7 +57,7 @@ public class Main {
 			SessionCommand command = SessionCommandReader.read(args);
 			Session session = SessionReader.read(command.getInputPath());
 			session.setCommand(command);
-			session.setResult(SessionRunner.generateResults(session.getInput(), command.getRules(), command.getCriterion()));
+			session.setResult(SessionRunner.generateResults(session.getInput(), command.getRules(), command.getCriteria()));
 			SessionWriter.write(session, command.getOutputPath());
 		} catch (FileNotFoundException ex) {
 			System.out.println("Error: File doesn't exists.");

@@ -1,14 +1,15 @@
 package main.java.base.session;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import main.java.base.Category;
 import main.java.base.CategoryFamily;
-import main.java.base.Vote;
 import main.java.base.criterion.Criterion;
-import main.java.base.criterion.CriterionTrue;
+import main.java.base.criterion.CriterionOr;
 import main.java.base.rules.VotingRule;
 
 /**
@@ -24,7 +25,7 @@ public class SessionCommand implements Serializable {
 	private String inputPath;
 	private String outputPath;
 	private List<VotingRule> rules;
-	private Criterion criterion;
+	private Set<Criterion> criteria;
 	
 	/**
 	 * Empty constructor
@@ -33,7 +34,8 @@ public class SessionCommand implements Serializable {
 		this.inputPath = null;
 		this.outputPath = null;
 		this.rules = new Vector<VotingRule>();
-		this.criterion = new CriterionTrue();
+		this.criteria = new LinkedHashSet<Criterion>();
+		this.criteria.add(new CriterionOr());
 	}
 
 	/**
@@ -41,14 +43,14 @@ public class SessionCommand implements Serializable {
 	 * @param inputPath
 	 * @param outputPath
 	 * @param rules
-	 * @param criterion
+	 * @param criteria
 	 */
-	public SessionCommand(String inputPath, String outputPath, List<VotingRule> rules, Criterion criterion) {
+	public SessionCommand(String inputPath, String outputPath, List<VotingRule> rules, Set<Criterion> criteria) {
 		super();
 		this.inputPath = inputPath;
 		this.outputPath = outputPath;
 		this.rules = rules;
-		this.criterion = criterion;
+		this.criteria = criteria;
 	}
 
 	/**
@@ -73,10 +75,10 @@ public class SessionCommand implements Serializable {
 	}
 
 	/**
-	 * @return criterion
+	 * @return criteria
 	 */
-	public Criterion getCriterion() {
-		return criterion;
+	public Set<Criterion> getCriteria() {
+		return criteria;
 	}
 
 	/**
@@ -103,8 +105,8 @@ public class SessionCommand implements Serializable {
 	/**
 	 * @param criterion the criterion to set
 	 */
-	public void setCriterion(Criterion criterion) {
-		this.criterion = criterion;
+	public void setCriterion(Set<Criterion> criteria) {
+		this.criteria = criteria;
 	}
 
 	/* (non-Javadoc)
@@ -112,7 +114,7 @@ public class SessionCommand implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "eCommand [inputPath=" + inputPath + ", outputPath=" + outputPath + ", rules=" + rules + "]";
+		return "Command [inputPath=" + inputPath + ", outputPath=" + outputPath + ", rules=" + rules + "]";
 	}
 
 	/**
@@ -120,7 +122,8 @@ public class SessionCommand implements Serializable {
 	 * @param family
 	 */
 	public void removeFamily(CategoryFamily family) {
-		this.getCriterion().removeKey(family.getDescription());
+		for (Criterion c : this.criteria)
+			c.removeKey(family.getDescription());
 	}
 
 	/**
@@ -129,6 +132,7 @@ public class SessionCommand implements Serializable {
 	 * @param category
 	 */
 	public void removeCategory(CategoryFamily family, Category category) {
-		this.getCriterion().removeValue(family.getDescription(), category.getDescription());
+		for (Criterion c : this.criteria)
+			c.removeValue(family.getDescription(), category.getDescription());
 	}
 }

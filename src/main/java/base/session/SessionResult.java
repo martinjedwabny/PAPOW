@@ -20,27 +20,24 @@ import main.java.base.rules.VotingRule;
 public class SessionResult implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	Map<Question, List<Vote>> validVotes;
-	Map<Question, Map<VotingRule, Ballot>> results;
+	Map<Question, Map<Criterion, List<Vote>>> validVotes;
+	Map<Question, Map<Criterion, Map<VotingRule, Ballot>>> results;
 	
 	/**
 	 * Empty constructor
 	 */
 	public SessionResult() {
-		this.validVotes = new HashMap<Question, List<Vote>>();
-		this.results = new HashMap<Question, Map<VotingRule, Ballot>>();
+		this.validVotes = new HashMap<Question, Map<Criterion, List<Vote>>>();
+		this.results = new HashMap<Question, Map<Criterion, Map<VotingRule, Ballot>>>();
 	}
 
 	/**
 	 * Default Constructor
-	 * @param questions
-	 * @param votingRules
 	 * @param validVotes
 	 * @param results
-	 * @param criterion
 	 */
-	public SessionResult(List<Question> questions, List<VotingRule> votingRules, Map<Question, List<Vote>> validVotes,
-			Map<Question, Map<VotingRule, Ballot>> results, Criterion criterion) {
+	public SessionResult(Map<Question, Map<Criterion, List<Vote>>> validVotes, 
+			Map<Question, Map<Criterion, Map<VotingRule, Ballot>>> results) {
 		super();
 		this.validVotes = validVotes;
 		this.results = results;
@@ -49,14 +46,14 @@ public class SessionResult implements Serializable {
 	/**
 	 * @return the validVotes
 	 */
-	public Map<Question, List<Vote>> getValidVotes() {
+	public Map<Question, Map<Criterion, List<Vote>>> getValidVotes() {
 		return validVotes;
 	}
 
 	/**
 	 * @return the results
 	 */
-	public Map<Question, Map<VotingRule, Ballot>> getResults() {
+	public Map<Question, Map<Criterion, Map<VotingRule, Ballot>>> getResults() {
 		return results;
 	}
 }

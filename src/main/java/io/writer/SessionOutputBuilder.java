@@ -2,6 +2,7 @@ package main.java.io.writer;
 
 import main.java.base.Question;
 import main.java.base.Vote;
+import main.java.base.criterion.Criterion;
 import main.java.base.ordering.Ballot;
 import main.java.base.rules.VotingRule;
 import main.java.base.session.Session;
@@ -34,8 +35,8 @@ public class SessionOutputBuilder {
 			return null;
 		StringBuilder output = new StringBuilder();
 		output.append(dashedLine);
-		if (session.getCommand() != null && session.getCommand().getCriterion() != null)
-			output.append("Criterion: " + session.getCommand().getCriterion().toString() + newLine);
+		if (session.getCommand() != null && !session.getCommand().getCriteria().isEmpty())
+			output.append("Criterion: " + session.getCommand().getCriteria().toString() + newLine);
 		output.append(dashedLine);
 		for (Question q : session.getInput().getQuestions())
 			buildOutputForQuestion(q, session, output);
@@ -52,13 +53,11 @@ public class SessionOutputBuilder {
 	private static void buildOutputForQuestion(Question q, Session session, StringBuilder output) {
 		output.append("Question: '" + q.getDescription() + "'" + newLine + dashedLine + newLine);
 		output.append(tab + "Votes:" + newLine);
-		// Take votes and get ranking
-		for (Vote v : session.getResult().getValidVotes().get(q))
-			output.append(tab + tab + v + newLine);
-		output.append(newLine);
 		// Run each voting rule and print the output
 		for (VotingRule rule : session.getCommand().getRules())
-			buildOutputForQuestionAndRule(output, rule, session.getResult().getResults().get(q).get(rule));
+			for (Criterion criterion : session.getCommand().getCriteria()) {
+				buildOutputForResult(output, rule, criterion, session.getResult().getResults().get(q).get(criterion).get(rule));
+			}
 		output.append(dashedLine);
 	}
 	
@@ -67,10 +66,11 @@ public class SessionOutputBuilder {
 	 * of the voting for the question and rule specified.
 	 * @param output
 	 * @param rule
+	 * @param criterion
 	 * @param votingResult
 	 */
-	private static void buildOutputForQuestionAndRule(StringBuilder output, VotingRule rule, Ballot votingResult) {
-		output.append(tab + rule.toString() + newLine);
+	private static void buildOutputForResult(StringBuilder output, VotingRule rule, Criterion criterion, Ballot votingResult) {
+		output.append(tab + rule.toString() + tab + criterion.toString() + newLine);
 		output.append(tab + tab + "Ranking " + votingResult + newLine + newLine);
 	}
 }

@@ -2,8 +2,10 @@ package main.java.io.reader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import main.java.base.criterion.Criterion;
 import main.java.base.rules.VotingRule;
@@ -28,7 +30,9 @@ public class SessionCommandReader {
 		String outputPath = options.getOrDefault(outputPathKey, "");
 		List<VotingRule> rules = parseRules(options.getOrDefault(votingRuleKey, null));
 		Criterion criterion = parseCriterion(options.getOrDefault(criterionKey, null));
-		return new SessionCommand(inputPath, outputPath, rules, criterion);
+		Set<Criterion> criteria = new LinkedHashSet<Criterion>();
+		criteria.add(criterion);
+		return new SessionCommand(inputPath, outputPath, rules, criteria);
 	}
 	
 	/**
@@ -67,12 +71,15 @@ public class SessionCommandReader {
 	 * @return list of voting rules to use in the calculations
 	 */
 	private static List<VotingRule> parseRules(String votingRule) {
+		if (votingRule == null)
+			return null;
 		List<VotingRule> rules = new ArrayList<VotingRule>();
 		String[] ruleCodes = null;
 		try {
 			ruleCodes = votingRule.substring(1, votingRule.length()-1).split(",");
 		} catch (Exception e) {
 			System.out.println("Problem parsing voting rules.");
+			e.printStackTrace();
 			return rules;
 		}
 		for (String ruleCode : ruleCodes)
