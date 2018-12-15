@@ -67,7 +67,9 @@ public class CriterionAnd extends Criterion {
 	public String toString() {
 		String ans = "";
 		if (this.subcriteria.isEmpty())
-			ans = "(EMPTY AND)";
+			ans = "(AND EMPTY)";
+		else if (this.subcriteria.size() == 1)
+			ans = "(AND ("+this.subcriteria.firstElement()+"))";
 		else {
 			ans = "(";
 			for (int i = 0; i < this.subcriteria.size(); i++) {

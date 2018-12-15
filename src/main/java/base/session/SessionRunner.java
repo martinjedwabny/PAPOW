@@ -26,12 +26,10 @@ public class SessionRunner {
 	public static SessionResult generateResults(SessionInput session, List<VotingRule> rules, Set<Criterion> criteria) {
 		Map<Question, Map<Criterion, List<Vote>>> validVotes = new LinkedHashMap<Question, Map<Criterion, List<Vote>>>();
 		Map<Question, Map<Criterion, Map<VotingRule, Ballot>>> votingResults = new LinkedHashMap<Question, Map<Criterion, Map<VotingRule, Ballot>>>();
-		// Get results for each questions, parallelize computations
-		session.getQuestions().parallelStream().forEach(question -> {
-			criteria.parallelStream().forEach(criterion -> {
+		// Get results for each questions
+		for (Question question : session.getQuestions())
+			for (Criterion criterion : criteria)
 				generateResult(question, criterion, rules, validVotes, votingResults);
-			});
-		});
 		return new SessionResult(validVotes, votingResults);
 	}
 
@@ -60,9 +58,8 @@ public class SessionRunner {
 				validVotes.get(question).get(criterion).add(v);
 			}
 		// Get results for each voting rule
-		rules.stream().forEach(rule -> {
+		for (VotingRule rule : rules)
 			votingResults.get(question).get(criterion).put(rule, rule.order(rankings));
-		});
 	}
 
 	/**

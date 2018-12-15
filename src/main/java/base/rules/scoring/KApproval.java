@@ -50,6 +50,8 @@ public class KApproval extends PositionalScoringRule {
 	 */
 	@Override
 	public String toString() {
+		if (k == 1)
+			return "Plurality";
 		return k+"-approval";
 	}
 

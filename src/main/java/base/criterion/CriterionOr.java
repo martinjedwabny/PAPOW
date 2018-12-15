@@ -68,7 +68,9 @@ public class CriterionOr extends Criterion {
 	public String toString() {
 		String ans = "";
 		if (this.subcriteria.isEmpty())
-			ans = "(EMPTY OR)";
+			ans = "(OR EMPTY)";
+		else if (this.subcriteria.size() == 1)
+			ans = "(OR ("+this.subcriteria.firstElement()+"))";
 		else {
 			ans = "(";
 			for (int i = 0; i < this.subcriteria.size(); i++) {
