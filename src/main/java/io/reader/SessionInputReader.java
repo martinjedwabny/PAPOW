@@ -113,14 +113,14 @@ public class SessionInputReader {
 			Map<Integer, Alternative> alternativeHash, Map<Integer, Voter> voterHash,
 			Map<Integer, CategoryFamily> familyHash, Map<Integer, Category> categoryHash, JSONArray questionsJ,
 			JSONArray votesJ, JSONArray votersJ, JSONArray categoryFamiliesJ) {
+		for(Object o: categoryFamiliesJ)
+			families.add(readFamily((JSONObject)o, familyHash, categoryHash));
 		for(Object o: questionsJ)
 			questions.add(readQuestion((JSONObject)o, alternativeHash, questionHash, alternatives));
 		for(Object o: votersJ)
-			voters.add(readVoter((JSONObject)o, voterHash));
-		for(Object o: categoryFamiliesJ)
-			families.add(readFamily((JSONObject)o, familyHash, categoryHash));
+			voters.add(readVoter((JSONObject)o, voterHash, familyHash, categoryHash));
 		for(Object o: votesJ)
-			votes.add(readVote((JSONObject)o, questionHash, alternativeHash, familyHash, categoryHash, voterHash));
+			votes.add(readVote((JSONObject)o, questionHash, alternativeHash, voterHash));
 	}
 
 	/**
@@ -135,8 +135,7 @@ public class SessionInputReader {
 	 * @return the vote as an object.
 	 */
 	private static Vote readVote(JSONObject o, Map<Integer, Question> questionHash,
-			Map<Integer, Alternative> alternativeHash, Map<Integer, CategoryFamily> familyHash,
-			Map<Integer, Category> categoryHash, Map<Integer, Voter> voterHash) {
+			Map<Integer, Alternative> alternativeHash, Map<Integer, Voter> voterHash) {
 		Integer idQuestion = ((Long) o.get("idQuestion")).intValue();
 		Integer idVoter = ((Long) o.get("voter")).intValue();
 		Voter v = voterHash.get(idVoter);
@@ -147,16 +146,8 @@ public class SessionInputReader {
 			Alternative a = alternativeHash.get(i+1);
 			rankForElement.put(a, rank);
 		}
-		HashMap<CategoryFamily, Category> categories = new HashMap<CategoryFamily, Category>();
-		JSONArray catJ = (JSONArray) o.get("categories");
-		for (int i=0; i < catJ.size(); i++) {
-			JSONObject co = (JSONObject) catJ.get(i);
-			Integer idFamily = ((Long)co.get("idFamily")).intValue();
-			Integer idCategory = ((Long)co.get("idCategory")).intValue();
-			categories.put(familyHash.get(idFamily), categoryHash.get(idCategory));
-		}
 		Ballot ranking = new Ballot(rankForElement);
-		Vote ans = new Vote(v, ranking, categories);
+		Vote ans = new Vote(v, ranking);
 		questionHash.get(idQuestion).addVote(ans);
 		return ans;
 	}
@@ -204,10 +195,18 @@ public class SessionInputReader {
 	 * @param voterHash id references.
 	 * @return the voter as an object.
 	 */
-	private static Voter readVoter(JSONObject o, Map<Integer, Voter> voterHash) {
+	private static Voter readVoter(JSONObject o, Map<Integer, Voter> voterHash, Map<Integer, CategoryFamily> familyHash, Map<Integer, Category> categoryHash) {
 		Integer id = ((Long) o.get("id")).intValue();
 		String name = (o.get("name")).toString();
-		Voter ans = new Voter(name);
+		HashMap<CategoryFamily, Category> categories = new HashMap<CategoryFamily, Category>();
+		JSONArray catJ = (JSONArray) o.get("categories");
+		for (int i=0; i < catJ.size(); i++) {
+			JSONObject co = (JSONObject) catJ.get(i);
+			Integer idFamily = ((Long)co.get("idFamily")).intValue();
+			Integer idCategory = ((Long)co.get("idCategory")).intValue();
+			categories.put(familyHash.get(idFamily), categoryHash.get(idCategory));
+		}
+		Voter ans = new Voter(name, categories);
 		voterHash.put(id, ans);
 		return ans;
 	}

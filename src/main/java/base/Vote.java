@@ -14,19 +14,16 @@ public class Vote implements Serializable {
 	
 	private Voter voter;
 	private Ballot ranking;
-	private Map<CategoryFamily, Category> categories;
 	
 	/**
 	 * Default constructor
 	 * @param voter
 	 * @param ranking
-	 * @param categories
 	 */
-	public Vote(Voter voter, Ballot ranking, Map<CategoryFamily, Category> categories) {
+	public Vote(Voter voter, Ballot ranking) {
 		super();
 		this.voter = voter;
 		this.ranking = ranking;
-		this.categories = categories;
 	}
 	
 	/**
@@ -39,7 +36,6 @@ public class Vote implements Serializable {
 		super();
 		this.voter = vote.voter;
 		this.ranking = new Ballot(vote.getRanking());
-		this.categories = new HashMap<CategoryFamily, Category>(vote.getCategories());
 	}
 
 	/**
@@ -63,26 +59,12 @@ public class Vote implements Serializable {
 		this.ranking = ranking;
 	}
 
-	/**
-	 * @param categories the categories to set
-	 */
-	public void setCategories(Map<CategoryFamily, Category> categories) {
-		this.categories = categories;
-	}
-
-	/**
-	 * @return categories
-	 */
-	public Map<CategoryFamily, Category> getCategories() {
-		return categories;
-	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Vote [ranking=" + ranking + ", voter=" + voter + ", categories=" + categories + "]";
+		return "Vote [ranking=" + ranking + ", voter=" + voter + "]";
 	}
 	
 }

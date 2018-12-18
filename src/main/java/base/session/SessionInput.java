@@ -186,7 +186,7 @@ public class SessionInput implements Serializable {
 		if (family == null)
 			return;
 		this.getFamilies().remove(family);
-		for (Vote v : this.getVotes())
+		for (Voter v : this.getVoters())
 			if (v.getCategories().containsKey(family))
 				v.getCategories().remove(family);
 	}
@@ -199,7 +199,7 @@ public class SessionInput implements Serializable {
 	public void removeCategory(CategoryFamily family, Category category) {
 		if (family == null || category == null)
 			return;
-		for (Vote v : this.getVotes())
+		for (Voter v : this.getVoters())
 			if (v.getCategories().containsKey(family) && v.getCategories().get(family).equals(category))
 				v.getCategories().remove(family);
 		family.getPossibilities().remove(category);

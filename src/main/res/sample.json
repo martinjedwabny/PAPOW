@@ -7,26 +7,26 @@
 		]}
 	],
 	"votes": [
-		{"id":1, "idQuestion": 1,"voter":1, "ranking": [1,2,3], "categories": [{"idFamily":1, "idCategory":1},{"idFamily":2, "idCategory":3}]},
-		{"id":2, "idQuestion": 1,"voter":2, "ranking": [1,2,3], "categories": [{"idFamily":1, "idCategory":1},{"idFamily":2, "idCategory":4}]},
-		{"id":2, "idQuestion": 1,"voter":3, "ranking": [1,2,3], "categories": [{"idFamily":1, "idCategory":2},{"idFamily":2, "idCategory":3}]},
-		{"id":2, "idQuestion": 1,"voter":4, "ranking": [1,2,3], "categories": [{"idFamily":1, "idCategory":2},{"idFamily":2, "idCategory":4}]},
-		{"id":2, "idQuestion": 1,"voter":5, "ranking": [3,1,2], "categories": [{"idFamily":1, "idCategory":2},{"idFamily":2, "idCategory":3}]},
-		{"id":2, "idQuestion": 1,"voter":6, "ranking": [3,1,2], "categories": [{"idFamily":1, "idCategory":2},{"idFamily":2, "idCategory":3}]},
-		{"id":2, "idQuestion": 1,"voter":7, "ranking": [3,1,2], "categories": [{"idFamily":1, "idCategory":2},{"idFamily":2, "idCategory":3}]},
-		{"id":2, "idQuestion": 1,"voter":8, "ranking": [3,2,1], "categories": [{"idFamily":1, "idCategory":2},{"idFamily":2, "idCategory":3}]},
-		{"id":2, "idQuestion": 1,"voter":9, "ranking": [3,2,1], "categories": [{"idFamily":1, "idCategory":2},{"idFamily":2, "idCategory":3}]}
+		{"id":1, "idQuestion": 1,"voter":1, "ranking": [1,2,3]},
+		{"id":2, "idQuestion": 1,"voter":2, "ranking": [1,2,3]},
+		{"id":2, "idQuestion": 1,"voter":3, "ranking": [1,2,3]},
+		{"id":2, "idQuestion": 1,"voter":4, "ranking": [1,2,3]},
+		{"id":2, "idQuestion": 1,"voter":5, "ranking": [3,1,2]},
+		{"id":2, "idQuestion": 1,"voter":6, "ranking": [3,1,2]},
+		{"id":2, "idQuestion": 1,"voter":7, "ranking": [3,1,2]},
+		{"id":2, "idQuestion": 1,"voter":8, "ranking": [3,2,1]},
+		{"id":2, "idQuestion": 1,"voter":9, "ranking": [3,2,1]}
 	],
 	"voters": [
-		{"id":1, "name": "V1"},
-		{"id":2, "name": "V2"},
-		{"id":3, "name": "V3"},
-		{"id":4, "name": "V4"},
-		{"id":5, "name": "V5"},
-		{"id":6, "name": "V6"},
-		{"id":7, "name": "V7"},
-		{"id":8, "name": "V8"},
-		{"id":9, "name": "V9"}
+		{"id":1, "name": "V1", "categories": [{"idFamily":1, "idCategory":1},{"idFamily":2, "idCategory":3}]},
+		{"id":2, "name": "V2", "categories": [{"idFamily":1, "idCategory":1},{"idFamily":2, "idCategory":3}]},
+		{"id":3, "name": "V3", "categories": [{"idFamily":1, "idCategory":1},{"idFamily":2, "idCategory":3}]},
+		{"id":4, "name": "V4", "categories": [{"idFamily":1, "idCategory":1},{"idFamily":2, "idCategory":3}]},
+		{"id":5, "name": "V5", "categories": [{"idFamily":1, "idCategory":1},{"idFamily":2, "idCategory":3}]},
+		{"id":6, "name": "V6", "categories": [{"idFamily":1, "idCategory":1},{"idFamily":2, "idCategory":3}]},
+		{"id":7, "name": "V7", "categories": [{"idFamily":1, "idCategory":1},{"idFamily":2, "idCategory":3}]},
+		{"id":8, "name": "V8", "categories": [{"idFamily":1, "idCategory":1},{"idFamily":2, "idCategory":3}]},
+		{"id":9, "name": "V9", "categories": [{"idFamily":1, "idCategory":1},{"idFamily":2, "idCategory":3}]}
 	],
 	"categoryFamilies": [
 		{"id":1, "description": "Country", "categories": [

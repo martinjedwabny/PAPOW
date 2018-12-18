@@ -18,14 +18,14 @@ public class QuestionTest {
 	
 	public QuestionTest() {
 		Alternative a1 = new Alternative("a1"), a2 = new Alternative("a2");
-		Voter v1 = new Voter("v1"), v2 = new Voter("v2");
 		Category c1 = new Category("France"), c2 = new Category("Algeria");
 		CategoryFamily f = new CategoryFamily("Country", new HashSet<Category>(Arrays.asList(c1, c2)));
 		Map<CategoryFamily, Category> fc1 = new HashMap<CategoryFamily, Category>();fc1.put(f, c1);
 		Map<CategoryFamily, Category> fc2 = new HashMap<CategoryFamily, Category>();fc2.put(f, c2);
+		Voter v1 = new Voter("v1", fc1), v2 = new Voter("v2", fc2);
 		Map<Alternative, Integer> r1 = new HashMap<Alternative, Integer>();r1.put(a1, 1);r1.put(a2, 2);
 		Map<Alternative, Integer> r2 = new HashMap<Alternative, Integer>();r2.put(a1, 2);r2.put(a2, 1);
-		Vote vote1 = new Vote(v1, new Ballot(r1), fc1), vote2 = new Vote(v2, new Ballot(r2), fc2);
+		Vote vote1 = new Vote(v1, new Ballot(r1)), vote2 = new Vote(v2, new Ballot(r2));
 		this.q = new Question("Question name", new Vector<Alternative>(Arrays.asList(a1,a2)), new HashSet<Vote>(Arrays.asList(vote1, vote2)));
 	}
 
@@ -41,7 +41,7 @@ public class QuestionTest {
 	public void shouldPreserveVotesOnAddAndRemove() throws Exception {
 		int a = q.getVotes().size();
 		Vote vote2 = q.getVotes().iterator().next();
-		Vote vote3 = new Vote(vote2.getVoter(), vote2.getRanking(), vote2.getCategories());
+		Vote vote3 = new Vote(vote2.getVoter(), vote2.getRanking());
 		q.addVote(vote3);
 		int b = q.getVotes().size();
 		q.removeVote(vote3);
