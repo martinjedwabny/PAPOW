@@ -2,7 +2,7 @@ package main.java.base;
 
 import java.io.Serializable;
 
-public class Alternative implements Serializable {
+public class Alternative implements Serializable, Comparable<Alternative> {
 	private static final long serialVersionUID = 1L;
 	
 	/**
@@ -39,6 +39,11 @@ public class Alternative implements Serializable {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public int compareTo(Alternative other) {
+		return this.getName().compareTo(other.getName());
 	}
 	
 }

@@ -40,7 +40,7 @@ public class Ballot extends TotalPreorder<Alternative> implements Serializable {
 			Alternative element = entry.getKey();
 			Integer rank = entry.getValue();
 			if (!elementsForRank.containsKey(rank))
-				elementsForRank.put(rank, new TreeSet<Alternative>((a1, a2) -> a1.getName().compareTo(a2.getName())));
+				elementsForRank.put(rank, new TreeSet<Alternative>());
 			elementsForRank.get(rank).add(element);
 		});
 		return elementsForRank;

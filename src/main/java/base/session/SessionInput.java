@@ -183,9 +183,11 @@ public class SessionInput implements Serializable {
 	 * @param family
 	 */
 	public void removeFamily(CategoryFamily family) {
+		if (family == null)
+			return;
 		this.getFamilies().remove(family);
 		for (Vote v : this.getVotes())
-			if (family != null && v.getCategories().containsKey(family))
+			if (v.getCategories().containsKey(family))
 				v.getCategories().remove(family);
 	}
 
@@ -195,10 +197,10 @@ public class SessionInput implements Serializable {
 	 * @param category
 	 */
 	public void removeCategory(CategoryFamily family, Category category) {
-		if (family == null || !this.getFamilies().contains(family) || category == null || !family.getPossibilities().contains(category))
+		if (family == null || category == null)
 			return;
 		for (Vote v : this.getVotes())
-			if (family != null && v.getCategories().containsKey(family) && category != null && v.getCategories().get(family).equals(category))
+			if (v.getCategories().containsKey(family) && v.getCategories().get(family).equals(category))
 				v.getCategories().remove(family);
 		family.getPossibilities().remove(category);
 		if (family.getPossibilities().isEmpty())
