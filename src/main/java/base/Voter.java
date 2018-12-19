@@ -1,6 +1,7 @@
 package main.java.base;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,6 +21,26 @@ public class Voter implements Serializable {
 		super();
 		this.name = name;
 		this.categories = categories;
+	}
+
+	/**
+	 * Only name constructor
+	 * @param name
+	 */
+	public Voter(String name) {
+		super();
+		this.name = name;
+		this.categories = new HashMap<CategoryFamily,Category>();
+	}
+
+	/**
+	 * Copy constructor
+	 * @param voter
+	 */
+	public Voter(Voter voter) {
+		super();
+		this.name = voter.getName();
+		this.categories = new HashMap<CategoryFamily, Category>(voter.getCategories());
 	}
 
 	/**
