@@ -1,4 +1,4 @@
-# BAAL : Ballot Aggregation for ALternatives
+# PAPOW : Papow Aggregates Preferences and Orderings to select Winners
 
 This module provides a tool to process votes through various voting rules and visualize the results.
 
