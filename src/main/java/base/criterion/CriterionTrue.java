@@ -18,7 +18,7 @@ public class CriterionTrue extends Criterion {
 	 */
 	@Override
 	public String toString() {
-		return "TRUE";
+		return "ANY";
 	}
 
 	@Override

@@ -9,7 +9,7 @@ import java.util.Vector;
 import main.java.base.Category;
 import main.java.base.CategoryFamily;
 import main.java.base.criterion.Criterion;
-import main.java.base.criterion.CriterionOr;
+import main.java.base.criterion.CriterionTrue;
 import main.java.base.rules.VotingRule;
 
 /**
@@ -35,7 +35,7 @@ public class SessionCommand implements Serializable {
 		this.outputPath = null;
 		this.rules = new Vector<VotingRule>();
 		this.criteria = new LinkedHashSet<Criterion>();
-		this.criteria.add(new CriterionOr());
+		this.criteria.add(new CriterionTrue());
 	}
 
 	/**
