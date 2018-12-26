@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
-import java.util.stream.Collectors;
-
 import main.java.base.CategoryFamily;
 import main.java.base.Question;
 import main.java.base.Vote;

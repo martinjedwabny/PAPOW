@@ -1,7 +1,6 @@
 package main.java.io.writer;
 
 import main.java.base.Question;
-import main.java.base.Vote;
 import main.java.base.criterion.Criterion;
 import main.java.base.ordering.Ballot;
 import main.java.base.rules.VotingRule;

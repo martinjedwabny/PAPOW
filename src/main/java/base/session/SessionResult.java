@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import main.java.base.Question;
-import main.java.base.Vote;
 import main.java.base.Voter;
 import main.java.base.criterion.Criterion;
 import main.java.base.ordering.Ballot;
