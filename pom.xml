@@ -1,44 +1,58 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.martinjedwabny.baal</groupId>
-  <artifactId>baal</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <build>
-    <sourceDirectory>src</sourceDirectory>
-    <resources>
-      <resource>
-        <directory>src</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-      </resource>
-    </resources>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.7.0</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  <dependencies>
-  	<dependency>
-  		<groupId>com.googlecode.json-simple</groupId>
-  		<artifactId>json-simple</artifactId>
-  		<version>1.1.1</version>
-  	</dependency>
-  </dependencies>
-  <packaging>pom</packaging>
-  <name>BAAL</name>
-  <description>BAAL - Ballot Aggregation for ALternatives.
-Main voting maven project.
-Contains base classes, voting rules and the ability of loading and saving sessions.</description>
-  <url>https://github.com/martinjedwabny/baal</url>
-  <organization>
-  	<url>https://github.com/martinjedwabny/baal</url>
-  	<name>martinjedwabny</name>
-  </organization>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.martinjedwabny</groupId>
+	<artifactId>papow</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+	</dependencies>
+
+	<packaging>pom</packaging>
+
+	<name>BAAL</name>
+	<description>PAPOW - PAPOW Aggregates Preferences and Orderings to select Winners. Voting maven project. Base module. Implements voting rules. Can load and save sessions.</description>
+	<url>https://github.com/martinjedwabny/papow</url>
+
+	<licenses>
+		<license>
+			<name>GNU General Public License (GPLV3+)</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.html</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Martin Jedwabny</name>
+			<email>martinjedwabny@gmail.com</email>
+			<organization>com.github.martinjedwabny</organization>
+			<organizationUrl>https://github.com/martinjedwabny/papow</organizationUrl>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/martinjedwabny/papow.git</connection>
+		<developerConnection>scm:git:ssh://github.com:martinjedwabny/papow.git</developerConnection>
+		<url>https://github.com/martinjedwabny/papow</url>
+	</scm>
+
 </project>
