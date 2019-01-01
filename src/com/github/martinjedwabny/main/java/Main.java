@@ -46,7 +46,7 @@ public class Main {
 	 * 		[[(A,B),(C,D)],[(E,F)]] array of array of pairs, translates as (A=B and C=D) or (E=F)
 	 * 
 	 * 	Example :
-	 * 		-f src/main/res/sample.json -v [pb,fb,k2] -c [[(Color,Red),(Country,France)]]
+	 * 		-f src/com/github/martinjedwabny/main/json/sample.json -v [pb,fb,k2] -c [[(Color,Red),(Country,France)]]
 	 * 
 	 * @param args
 	 * @throws Exception
