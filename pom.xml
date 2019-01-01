@@ -1,9 +1,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>com.github.martinjedwabny</groupId>
 	<artifactId>papow</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 
+	<name>PAPOW</name>
+	<description>PAPOW - PAPOW Aggregates Preferences and Orderings to select Winners. Voting maven project. Base module. Implements voting rules. Can load and save sessions.</description>
+	<url>https://github.com/martinjedwabny/papow</url>
+
+	<licenses>
+		<license>
+			<name>GNU General Public License (GPLV3+)</name>
+			<url>http://www.gnu.org/licenses/gpl-3.0.html</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Martin Jedwabny</name>
+			<email>martinjedwabny@gmail.com</email>
+			<organization>com.github.martinjedwabny</organization>
+			<organizationUrl>https://github.com/martinjedwabny/papow</organizationUrl>
+		</developer>
+	</developers>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -91,33 +112,11 @@
 		</dependency>
 	</dependencies>
 
-	<packaging>pom</packaging>
-
-	<name>PAPOW</name>
-	<description>PAPOW - PAPOW Aggregates Preferences and Orderings to select Winners. Voting maven project. Base module. Implements voting rules. Can load and save sessions.</description>
-	<url>https://github.com/martinjedwabny/papow</url>
-
-	<licenses>
-		<license>
-			<name>GNU General Public License (GPLV3+)</name>
-			<url>http://www.gnu.org/licenses/gpl-3.0.html</url>
-		</license>
-	</licenses>
-
-	<developers>
-		<developer>
-			<name>Martin Jedwabny</name>
-			<email>martinjedwabny@gmail.com</email>
-			<organization>com.github.martinjedwabny</organization>
-			<organizationUrl>https://github.com/martinjedwabny/papow</organizationUrl>
-		</developer>
-	</developers>
-
 	<scm>
 		<connection>scm:git:https://github.com/martinjedwabny/papow.git</connection>
 		<developerConnection>scm:git:https://github.com/martinjedwabny/papow.git</developerConnection>
 		<url>https://github.com/martinjedwabny/papow</url>
-	  <tag>papow-1.0.2</tag>
+	  <tag>papow-1.0.4</tag>
   </scm>
 
 	<distributionManagement>
