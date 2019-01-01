@@ -114,8 +114,8 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:git@github.com:martinjedwabny/papow.git</connection>
-		<developerConnection>scm:git:git@github.com:martinjedwabny/papow.git</developerConnection>
+		<connection>scm:git:git://github.com/martinjedwabny/papow.git</connection>
+		<developerConnection>scm:git:git://github.com/martinjedwabny/papow.git</developerConnection>
 		<url>https://github.com/martinjedwabny/papow</url>
 	  <tag>papow-1.0.2</tag>
   </scm>
