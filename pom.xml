@@ -3,7 +3,7 @@
 
 	<groupId>com.github.martinjedwabny</groupId>
 	<artifactId>papow</artifactId>
-	<version>1.0.5-SNAPSHOT</version>
+	<version>1.0.5</version>
 
 	<name>PAPOW</name>
 	<description>PAPOW - PAPOW Aggregates Preferences and Orderings to select Winners. Voting maven project. Base module. Implements voting rules. Can load and save sessions.</description>
@@ -116,7 +116,7 @@
 		<connection>scm:git:https://github.com/martinjedwabny/papow.git</connection>
 		<developerConnection>scm:git:https://github.com/martinjedwabny/papow.git</developerConnection>
 		<url>https://github.com/martinjedwabny/papow</url>
-	  <tag>HEAD</tag>
+	  <tag>papow-1.0.5</tag>
   </scm>
 
 	<distributionManagement>
