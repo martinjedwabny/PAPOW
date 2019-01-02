@@ -1,3 +1,5 @@
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.martinjedwabny/papow.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.martinjedwabny%22%20AND%20a:%22papow%22)
+
 # PAPOW : Papow Aggregates Preferences and Orderings to select Winners
 
 This module provides a tool to process votes through various voting rules and visualize the results.
