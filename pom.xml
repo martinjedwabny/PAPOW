@@ -52,7 +52,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
+				<configuration>
+					<source>8</source>
+				</configuration>
+				<version>3.2.0</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -100,6 +103,26 @@
 					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 					<autoReleaseAfterClose>true</autoReleaseAfterClose>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<shadedArtifactAttached>true</shadedArtifactAttached>
+							<transformers>
+								<transformer implementation=
+								"org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>main.java.Main</mainClass>
+							</transformer>
+						</transformers>
+					</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -48,8 +48,8 @@ public class Main {
 	 * 	Example :
 	 * 		-f src/main/resources/sample.json -v [pb,fb,k2] -c [[(Color,Red),(Country,France)]]
 	 * 
-	 * @param args
-	 * @throws Exception
+	 * @param args command line arguments
+	 * @throws Exception problem with command line input
 	 */
 
 	public static void main(String[] args) throws Exception {
